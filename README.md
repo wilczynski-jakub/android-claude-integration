@@ -333,7 +333,7 @@ When a script re-reads a variable after its value changed, you won't see it in t
 magicText.evaluateBoolean("{" + "v=SOME_VAR" + "}");
 ```
 
-### Shell profiles ([.bash_profile_termux](.bash_profile_termux), [.bash_profile_prootdistro](.bash_profile_prootdistro))
+### Shell profiles ([profile_termux](bash_profiles/profile_termux), [profile_prootdistro](bash_profiles/profile_prootdistro))
 
 When these profiles are combined together, this happens when you open Termux:
 
@@ -341,24 +341,24 @@ When these profiles are combined together, this happens when you open Termux:
 
 Very convenient if you use it mostly for editing MacroDroid scripts with Claude Code.
 
-#### [apply_bash_profile.sh](apply_bash_profile.sh)
+#### [apply_profile.sh](bash_profiles/apply_profile.sh)
 
 This assumes you have this repo cloned in your Android's ***Internal Storage***.
 
-To apply [.bash_profile_termux](.bash_profile_termux) to Termux:
+To apply [profile_termux](bash_profiles/profile_termux) to Termux:
 
 ```bash
-./apply_bash_profile.sh \
-	"$HOME/storage/shared/MacroDroid/.bash_profile_termux" \
-	"$PREFIX/etc/bash.bashrc"
+./bash_profiles/apply_profile.sh \
+	"$PREFIX/etc/bash.bashrc" \
+	"$HOME/storage/shared/MacroDroid/bash_profiles/profile_termux"
 ```
 
-Then, to apply [.bash_profile_prootdistro](.bash_profile_prootdistro) to the environment where your Claude Code lives ([**proot-distro** Ubuntu](https://github.com/ferrumclaudepilgrim/claude-code-android/blob/main/docs/install.md#path-b-proot-distro-ubuntu) in my case):
+Then, to apply [profile_prootdistro](bash_profiles/profile_prootdistro) to the environment where your Claude Code lives ([**proot-distro** Ubuntu](https://github.com/ferrumclaudepilgrim/claude-code-android/blob/main/docs/install.md#path-b-proot-distro-ubuntu) in my case):
 
 ```bash
-./apply_bash_profile.sh \
+./bash_profiles/apply_profile.sh \
 	"$HOME/.profile"\
-	"$HOME/claude-code-macrodroid/.bash_profile_ubuntu"
+	"$HOME/claude-code-macrodroid/bash_profiles/profile_prootdistro"
 ```
 
 </details>
