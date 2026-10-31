@@ -341,19 +341,17 @@ When these profiles are combined together, this happens when you open Termux:
 
 Very convenient if you use it mostly for editing MacroDroid scripts with Claude Code.
 
-#### [apply_profile.sh](bash_profiles/apply_profile.sh)
-
-This assumes you have this repo cloned in your Android's ***Internal Storage***.
-
-To apply [profile_termux](bash_profiles/profile_termux) to Termux:
+To apply [profile_termux](bash_profiles/profile_termux), run this in Termux default session (assuming you have this repo cloned in your Android's ***Internal Storage***):
 
 ```bash
+termux-setup-storage # if you haven't done that before
+
 ./bash_profiles/apply_profile.sh \
 	"$PREFIX/etc/bash.bashrc" \
-	"$HOME/storage/shared/MacroDroid/bash_profiles/profile_termux"
+	"$HOME/storage/shared/claude-code-macrodroid/bash_profiles/profile_termux"
 ```
 
-Then, to apply [profile_prootdistro](bash_profiles/profile_prootdistro) to the environment where your Claude Code lives ([**proot-distro** Ubuntu](https://github.com/ferrumclaudepilgrim/claude-code-android/blob/main/docs/install.md#path-b-proot-distro-ubuntu) in my case):
+To apply [profile_prootdistro](bash_profiles/profile_prootdistro), run this in the environment where your Claude Code lives ([**proot-distro** Ubuntu](https://github.com/ferrumclaudepilgrim/claude-code-android/blob/main/docs/install.md#path-b-proot-distro-ubuntu) in my case):
 
 ```bash
 ./bash_profiles/apply_profile.sh \
