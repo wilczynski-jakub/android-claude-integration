@@ -1,4 +1,5 @@
-/* MacroDroid: reads local system_prompt, prompt, file api_key.txt; writes request_body, success, response_return_code, response_output, response_text, input_tokens, output_tokens */
+// Required local variables: system_prompt, prompt
+// Required file: /data/user/0/com.arlosoft.macrodroid/files/api_key.txt
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,7 +27,6 @@ String readApiKey() {
 	while ((line = reader.readLine()) != null) {
 		apiKey.append(line);
 	}
-
 	reader.close();
 
 	return apiKey.toString().replaceAll("\\s", "");
@@ -162,12 +162,12 @@ try {
 
 			// A reply cut off at max_tokens is incomplete JSON, and asking again would cut it off the same way.
 			String stopReason = response.optString("stop_reason");
-			boolean isTruncated = stopReason.equals("max_tokens");
+			boolean tokenLimitReached = stopReason.equals("max_tokens");
 			System.out.println("stopReason = `" + stopReason + "`");
-			System.out.println("isTruncated = `" + isTruncated + "`");
+			System.out.println("tokenLimitReached = `" +tokenLimitReached + "`");
 			System.out.println();
 
-			if (isTruncated) {
+			if (tokenLimitReached) {
 				break;
 			}
 

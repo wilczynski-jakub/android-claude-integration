@@ -1,4 +1,4 @@
-/* MacroDroid: reads local message; writes user_instruction; returns userInstruction */
+// Required local variable: message
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -94,4 +94,4 @@ String dialogMessage = "It stopped with this error:\n" + errorMessage
 userInstruction = askForInstruction(dialogMessage, DIALOG_TIMEOUT_SECONDS).trim();
 System.out.println("userInstruction = `" + userInstruction + "`");
 
-userInstruction;
+userInstruction; // Output Variable
