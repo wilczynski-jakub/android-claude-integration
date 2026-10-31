@@ -7,9 +7,9 @@
 
 ![MacroDroid - Device Automation. Turn your device into a smart assistant that works for you. MacroDroid is the easiest way to automate almost anything on your phone or tablet — no coding required, just a few taps.](media/macrodroid.png)
 
-Even though the description says "no coding required", it provides a way to run scripts written in Java (actually that's a scripting language BeanShell, but even the app suggests that it's close enough to Java to call it Java).
+Even though the description says "no coding required", it provides a way to run scripts written in Java (actually it's BeanShell, a scripting language, but even the app suggests that it's close enough to Java to call it *"Java Code"*).
 
-### Why use Java Code in MacroDroid?
+### Why use *Java Code* in MacroDroid?
 
 I'm aware that most of the scripts in this repo could be built with MacroDroid's nice-looking GUI action blocks. However, **not all Android APIs are available in GUI**. I also think it's worth knowing how the Android APIs are implemented programmatically.
 
@@ -17,7 +17,7 @@ Moreover, when working with code, you can use AI to for code edits. Although the
 
 ### Wait, Claude Code on Android?
 
-There is a terminal app: [Termux](https://github.com/termux/termux-app), that works as a Linux emulator. Claude Code has **no official Android build**, but there is a [community installer for Termux](https://github.com/ferrumclaudepilgrim/claude-code-android). (Using Claude that way may be a bit laggy, but works well with `/remote-control`.)
+There is a terminal app: [Termux](https://play.google.com/store/apps/details?id=com.termux), that works as a Linux emulator. Claude Code has **no official Android build**, but there is a [community installer for Termux](https://github.com/ferrumclaudepilgrim/claude-code-android). (Using Claude that way may be a bit laggy, but works well with `/remote-control`.)
 
 </details>
 
@@ -26,21 +26,21 @@ There is a terminal app: [Termux](https://github.com/termux/termux-app), that wo
 
 ### UI agent (`src/ui-agent/`)
 
-Automated UI interactions, supervised by Claude. You're defining a goal, and the script checks the current screen state and creates **rules** for it (i.e. maps screen states to actions that should be done, e.g. clicking an element), saved to `rules.json`. When no rule matches, or the UI gets stuck, Claude is asked via API about what should be done.
+Automated UI interactions, **supervised by Claude**. You're defining a goal, and the script **reads the current screen state** and creates *rules* for it (i.e. maps screen states to actions that should be done, e.g. clicking an element), saved to `rules.json`. When no rule matches, or the UI gets stuck, **Claude is asked via API** about what should be done.
 
-The screen recording below shows how the UI agent works when asked to scan a document:
+<sub>The screen recording below shows how the UI agent works when asked to scan a document.</sub>
 
 ![Screen recording - automated document scan](media/canon-print.gif)
 
 | Script | What it does |
 | --- | --- |
-| [ask-claude](src/ui-agent/ask-claude.bsh.java) | Sends a prompt to the Claude API via an HTTP request, retries it if failed |
+| [ask-claude](src/ui-agent/ask-claude.bsh.java) | Sends a prompt to the **Claude API** via an HTTP request, retries it if failed |
 | [get-current-screen-content](src/helpers/get-current-screen-content.bsh.java) | Reads every text visible on screen into a JSON object, with ***view IDs*** as values. Also used by [System Maintenance Restriction](#system-maintenance-restriction-srcsysmaint-restrict). |
-| [save-a-new-rule](src/ui-agent/save-a-new-rule.bsh.java) | Checks Claude's answer and maps the current screen state to a rule (saved to `rules.json`) |
+| [save-a-new-rule](src/ui-agent/save-a-new-rule.bsh.java) | Checks Claude's answer and maps the **current screen state** to a rule (saved to `rules.json`) |
 | [match-an-existing-rule](src/ui-agent/match-an-existing-rule.bsh.java) | Checks if there is a rule in `rules.json` for the current screen state |
 | [run-a-single-ui-action](src/ui-agent/run-a-single-ui-action.bsh.java) | Extracts `actionType`, `actionViewId` and `actionSeconds` from a matched rule |
 | [ask-user-for-instruction](src/ui-agent/ask-user-for-instruction.bsh.java) | After an error, asks the user what should happen on the current screen |
-| [run-multiple-ui-actions](src/ui-agent/run-multiple-ui-actions.bsh.java) | Together with all scripts above, decides what should happen next (whether to ask Claude for a new rule, or do the UI action based on an existing rule, etc.). |
+| [run-multiple-ui-actions](src/ui-agent/run-multiple-ui-actions.bsh.java) | Together with all scripts above, **decides what should happen next** (whether to ask Claude for a new rule, or do the UI action based on an existing rule, etc.). |
 
 #### Example workflow
 <details>
@@ -130,19 +130,19 @@ Loop for `timeout_mins` minutes:
 
 ### System Maintenance Restriction (`src/sysmaint-restrict/`)
 
-Useful for **self-discipline macros**, for example: when you want MacroDroid to block the YouTube app, in order for it to really work, you should neither be able to open the MacroDroid app, uninstall it nor revoke its permissions.
+Useful for **self-discipline macros**, for example: when you want MacroDroid to **block another app**, in order for it to really work, you should neither be able to open the MacroDroid app, uninstall it nor revoke its permissions.
 
-The screen recording below shows how, as soon as the text *"MacroDroid"* is detected on screen in the Settings app, the phone gets locked:
+<sub>The screen recording below shows how, as soon as the text *"MacroDroid"* is detected on screen in the Settings app, the phone gets locked.</sub>
 
 ![Screen recording - MacroDroid app settings blocked](media/installed-apps-lock.gif)
 
 | Script | What it does |
 | --- | --- |
-| [invoke-lock](src/sysmaint-restrict/invoke-lock.bsh.java) | When the `SYSMAINT_RESTRICT_SINCE` timestamp is not before 10 minutes ago, the script uses ***AccessibilityService*** to launch home screen and ***DevicePolicyManager*** to lock the phone (without the ability to quickly unlock with biometrics). Otherwise it sets `SYSMAINT_RESTRICT_VALUE` to false. |
-| [search-in-screen-content](src/helpers/search-in-screen-content.bsh.java) | Searches the result of [get-current-screen-content](src/helpers/get-current-screen-content.bsh.java) (in local variable `contents_str`) for the regex in local variable `regex_to_search`. The boolean result goes to `found_on_screen`. |
+| [invoke-lock](src/sysmaint-restrict/invoke-lock.bsh.java) | When the `SYSMAINT_RESTRICT_SINCE` timestamp is not before 10 minutes ago, the script uses ***AccessibilityService*** to launch the home screen and ***DevicePolicyManager*** to lock the phone (without the ability to quickly unlock with biometrics). Otherwise it sets `SYSMAINT_RESTRICT_VALUE` to false. |
+| [search-in-screen-content](src/helpers/search-in-screen-content.bsh.java) | Searches the result of [get-current-screen-content](src/helpers/get-current-screen-content.bsh.java) (in local variable: `contents_str`) for a given regex (local variable: `regex_to_search`). The boolean result goes to `found_on_screen`. |
 
 #### Example workflow
-Let's say we want to block YouTube after using it for more than 15 minutes:
+Let's say we want to **block YouTube** after using it for more than 15 minutes:
 
 <table>
 <tr>
@@ -229,14 +229,13 @@ Run: `invoke-lock.bsh`
 ### Calendar log (`src/calendar-log/`)
 
 Logs events to your calendar, very useful when you sometimes wonder: ***"What was I doing on day X?***
-<!-- TODO: poprawić językowo powyższe zdanie -->
 
 <img src="media/calendar.webp" alt="Google Calendar day view with logged events: three &quot;commuting...&quot; location events with a Google Maps link, then Claude and Spotify app usage events" width="400">
 
 | Script | What it does |
 | --- | --- |
-| [check-location](src/calendar-log/check-location.bsh.java) | Calculates distance between the **current location** and the previous one - if greater than **100 m**, increments `LOC_TRAVEL_TIME`. Sets these global variables: `LOC_NOW_LAT`, `LOC_NOW_LON`, `LOC_MAP_URL`. Creates a **calendar event** after a finished trip (or when `LOC_TRAVEL_TIME >= LOC_MAX_EVENT_TIME`). |
-| [check-current-app](src/calendar-log/check-current-app.bsh.java) | Sets the global variables: `APP_NAME`, `APP_PACKAGE`, increments `APP_TIME_COUNT` if **app didn't change** since last check. Creates a **calendar event** after long usage series of a single app. |
+| [check-location](src/calendar-log/check-location.bsh.java) | Calculates the distance between the **current location** and the previous one - if greater than **100 m**, increments `LOC_TRAVEL_TIME`. Sets the global variables: `LOC_NOW_LAT`, `LOC_NOW_LON`, `LOC_MAP_URL`. Creates a **calendar event** after a finished trip (or when `LOC_TRAVEL_TIME >= LOC_MAX_EVENT_TIME`). |
+| [check-current-app](src/calendar-log/check-current-app.bsh.java) | Sets the global variables: `APP_NAME`, `APP_PACKAGE`, increments `APP_TIME_COUNT` if **app didn't change** since last check. Creates a **calendar event** after a long series of usage of a single app. |
 
 #### Workflow
 
@@ -289,13 +288,13 @@ Run: `check-current-app.bsh`
 
 ### How the scripts reach MacroDroid
 
-All the **[Macros](macros)** use:
+All **[Macros](macros)** in this repo use:
 
 <img src="media/read-from-file-java-code.png" alt="MacroDroid actions: Read from File ({lv=code_filename} -> code_content), then Java Code ({lv=code_content})" width="400">
 
-Of course, it's possible to create a separate ***Action Block*** for that, but then you won't be able to use MacroDroid's **local variables** in the scripts.
+<sub>Of course, it's possible to create a separate ***Action Block*** for that, but then you won't be able to use MacroDroid's **local variables** in the scripts.</sub>
 
-It's not that simple though... When `code_content` contains `\n` characters, BeanShell throws *Token Parsing Error*. That's why I wrote **[build.py](build.py)**, which converts each `src/category/scriptname.bsh.java` file from this:
+It's not that simple though... When `code_content` contains `\n` characters, BeanShell throws *Token Parsing Error*. That's why you need to use **[build.py](build.py)**, which converts each `src/category/scriptname.bsh.java` file from this:
 
 ```java
 // A very long script
@@ -311,12 +310,14 @@ to the code below, at path `out/scriptname.bsh`:
 
 `out/` has no subfolders, so every script name must be unique across the whole `src/` (`build.py` stops with an error otherwise).
 
-Optionally - with argument `--debug`, before converting, adds these two lines at the beginning (for a more clean console output, makes debugging easier):
+Optionally `build.py --debug`, in order to add these two lines at the beginning of the code (before merging all lines into one):
 
 ```java
 System.out.println("===== scriptname.bsh =====");
 System.out.println(magicText.evaluateString("{" + "trigger_that_fired_detailed" + "}\n"));
 ```
+
+makes debugging much easier.
 
 ### Evaluating variables (`magicText`)
 
@@ -325,9 +326,9 @@ A script usually reads a MacroDroid variable with:
 magicText.evaluateBoolean("{v=SOME_VAR}");
 ```
 
-However, MacroDroid replaces every literal `{...}` with the actual value **once, when the script is loaded**, before BeanShell runs. 
+However, MacroDroid replaces every literal `{...}` with the actual value - **once, as soon as the script is loaded**, before it runs. 
 
-When a script re-reads a variable after its value changed, you won't see it in the console output. To keep the evaluations live, split the string:
+When a variable changes value during runtime, you won't see it in the console output. To keep the evaluations live, split the string:
 
 ```java
 magicText.evaluateBoolean("{" + "v=SOME_VAR" + "}");
@@ -339,9 +340,13 @@ When these profiles are combined together, this happens when you open Termux:
 
 <img src="media/bash_profile.png" alt="Termux: Run Ubuntu (y) now?, then Run claude (y) or claude -r (r) now?" width="400">
 
+<sub>On **Termux** startup, the console asks you to launch **Ubuntu**.
+<br/>Then, on **Ubuntu** startup, it asks you to launch **Claude Code**.
+</sub>
+
 Very convenient if you use it mostly for editing MacroDroid scripts with Claude Code.
 
-To apply [profile_termux](bash_profiles/profile_termux), run this in Termux default session (assuming you have this repo cloned in your Android's ***Internal Storage***):
+To apply [profile_termux](bash_profiles/profile_termux), run this in the default Termux session (assuming you have this repo cloned in your Android's ***Internal Storage***):
 
 ```bash
 termux-setup-storage # if you haven't done that before
@@ -355,7 +360,7 @@ To apply [profile_prootdistro](bash_profiles/profile_prootdistro), run this in t
 
 ```bash
 ./bash_profiles/apply_profile.sh \
-	"$HOME/.profile"\
+	"$HOME/.profile" \
 	"$HOME/claude-code-macrodroid/bash_profiles/profile_prootdistro"
 ```
 
@@ -364,12 +369,14 @@ To apply [profile_prootdistro](bash_profiles/profile_prootdistro), run this in t
 <details open>
 <summary><h2>Maintenance</h2></summary>
 
-When coding with Claude, it's a good practice to define some rules, e.g. into a `CLAUDE.md` file. Examples are described below.
+When coding with Claude, it's good practice to **define some rules**, e.g. in a `CLAUDE.md` file.
+
+Examples are described below.
 
 <details open>
 <summary><h4>Logging variable values</h4></summary>
 
- > ***Always log a value only after it was really read or computed, never a value that is assumed or expected.***
+ > *Always log a value only **after it was really read or computed**, never a value that is **assumed or expected**.*
 
 This makes debugging much easier:
 
@@ -383,16 +390,16 @@ Also, LLMs may have a tendency to 'guess' variable values like this:
 System.out.println("variable = `true`");
 ```
 
-because it should be true, but it's better to **forbid that** - I myself experienced a situation when this assumption about a variable value, that AI made, was wrong.
+because it seems that it should be true, but it's better to **forbid that** - I myself experienced a situation when this assumption about a variable value, that AI made, was wrong.
 
 </details>
 
 <details open>
 <summary><h4>Importing Java packages</h4></summary>
 
-> ***Never write fully-qualified class names inline (`java.util.List`); instead, add an `import` at the top of the file and use the short name.***
+> ***Never write fully-qualified class names** inline (`java.util.List`); instead, add an `import` at the top of the file and **use the short name**.*
 
-Annoyingly, LLMs may have tendency to write lines of code like these:
+Annoyingly, LLMs may have a tendency to write lines of code like these:
 
 ```java
 android.app.admin.DevicePolicyManager dpm = (android.app.admin.DevicePolicyManager) appContext.getSystemService(android.content.Context.DEVICE_POLICY_SERVICE);
@@ -402,18 +409,26 @@ android.view.accessibility.AccessibilityWindowInfo window = (android.view.access
 accessibility.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HOME);
 ```
 
-so it may better to **forbid such lines** and require writing importing packages.
+so it may better to **forbid such lines** and require writing importing packages, so that the code is much shorter:
+
+```java
+DevicePolicyManager dpm = (DevicePolicyManager) appContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+
+AccessibilityWindowInfo window = (AccessibilityWindowInfo) windows.get(windowIndex);
+
+accessibility.performGlobalAction(AccessibilityService.GLOBAL_ACTION_HOME);
+```
 
 </details>
 
 <details open>
 <summary><h4>Analysing MacroDroid exports</h4></summary>
 
-> ***For `.macro`, `.ablock` and `.mdr` files: use `mdr.py` instead of writing throwaway scripts.***
+> *For `.macro`, `.ablock` and `.mdr` files: use `mdr.py` **instead of writing throwaway scripts.***
 
-These extensions are just MacroDroid's different names for **JSON**. Their format is repeatable - an LLM will notice that and, when asked about such file, will try to simplify it with Python scripts.
+**MacroDroid exports** come with extensions: `.macro`, `.ablock` and `.mdr` - but it's all actually **JSON**, and their structure is always the same. Claude, when asked to analyze a macro, notices these patterns and keeps writing small Python scripts (`python -c "..."`) from scratch, in every new session. That's a **waste of tokens** (and your time, if you review everything Claude does, just as I do).
 
-In each new session, it will be figuring out these scripts again and again... That's a waste of tokens - instead, you can ask it to write a `mdr.py` file. I haven't added it to this repo, since it was "vibe coded" and you can really vibe code it yourself. But this is how it works:
+Instead, you can ask Claude once to write a **reusable** `mdr.py` script. My version isn't in this repo, since it was *"vibe coded"* and you can generate your own just as easily. This is how mine works:
 
 ```yml
 usage: mdr.py [-h] [--limit LIMIT]
@@ -426,7 +441,7 @@ positional arguments:
 
     list                list exports with their indexes
     diff                what changed between two exports
-    keys                top-level keys of a export
+    keys                top-level keys of an export
     macros              all macros and action blocks
     macro               dump one macro: triggers, constraints, variables, actions
     find                every value containing the text, with its JSON path
