@@ -1,4 +1,4 @@
-# MacroDroid and Claude: Android automation with AI
+# Claude Code for MacroDroid: Android automation with AI
 
 <details>
 <summary><h2>Some context</h2></summary>
