@@ -368,7 +368,9 @@ Then, to apply [profile_prootdistro](bash_profiles/profile_prootdistro) to the e
 
 When coding with Claude, it's a good practice to define some rules, e.g. into a `CLAUDE.md` file. Examples are described below.
 
-#### Logging variable values
+<details open>
+<summary><h4>Logging variable values</h4></summary>
+
  > ***Always log a value only after it was really read or computed, never a value that is assumed or expected.***
 
 This makes debugging much easier:
@@ -385,7 +387,11 @@ System.out.println("variable = `true`");
 
 because it should be true, but it's better to **forbid that** - I myself experienced a situation when this assumption about a variable value, that AI made, was wrong.
 
-#### Importing Java packages
+</details>
+
+<details open>
+<summary><h4>Importing Java packages</h4></summary>
+
 > ***Never write fully-qualified class names inline (`java.util.List`); instead, add an `import` at the top of the file and use the short name.***
 
 Annoyingly, LLMs may have tendency to write lines of code like these:
@@ -400,7 +406,11 @@ accessibility.performGlobalAction(android.accessibilityservice.AccessibilityServ
 
 so it may better to **forbid such lines** and require writing importing packages.
 
-#### Analysing MacroDroid exports
+</details>
+
+<details open>
+<summary><h4>Analysing MacroDroid exports</h4></summary>
+
 > ***For `.macro`, `.ablock` and `.mdr` files: use `mdr.py` instead of writing throwaway scripts.***
 
 These extensions are just MacroDroid's different names for **JSON**. Their format is repeatable - an LLM will notice that and, when asked about such file, will try to simplify it with Python scripts.
@@ -428,5 +438,7 @@ options:
   -h, --help            show this help message and exit
   --limit LIMIT         max printed characters per value (default 300)
 ```
+
+</details>
 
 </details>
