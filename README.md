@@ -231,7 +231,7 @@ Run: `invoke-lock.bsh`
 Logs events to your calendar, very useful when you sometimes wonder: ***"What was I doing on day X?***
 <!-- TODO: poprawić językowo powyższe zdanie -->
 
-<img src="media/calendar.png" alt="todo alt text" width="400">
+<img src="media/calendar.webp" alt="Google Calendar day view with logged events: three &quot;commuting...&quot; location events with a Google Maps link, then Claude and Spotify app usage events" width="400">
 
 | Script | What it does |
 | --- | --- |
