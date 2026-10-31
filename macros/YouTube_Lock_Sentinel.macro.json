@@ -22,7 +22,7 @@
             },
             {
                 "isLocalVar": true,
-                "m_name": "contents_str",
+                "m_name": "contents_json",
                 "m_stringValue": "",
                 "m_type": 2,
                 "supportsOutput": true
@@ -94,7 +94,7 @@
             },
             {
                 "blockNextAction": true,
-                "responseVariableName": "contents_str",
+                "responseVariableName": "contents_json",
                 "runInBackgroundThread": true,
                 "scriptText": "{lv=code_content}",
                 "m_SIGUID": 0,

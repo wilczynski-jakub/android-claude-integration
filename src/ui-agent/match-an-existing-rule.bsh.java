@@ -1,4 +1,4 @@
-/* MacroDroid: reads local goal, current_step, contents_str, file rules.json; writes file rules.json; returns resultJson */
+// Required local variables: goal_name, current_step, contents_json
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-String resultJson = "";
+String resultJSON = "";
 
 String RULES_FILE_NAME = "rules.json";
 String RULES_BACKUP_FILE_NAME = "rules.backup.json";
@@ -32,7 +32,6 @@ String readFile(File file) {
 	}
 
 	reader.close();
-
 	return content.toString();
 }
 
@@ -44,6 +43,7 @@ void writeFile(File file, String content) {
 
 JSONObject createEmptyRules() {
 	JSONObject rules = new JSONObject();
+
 	rules.put("resetId", RULES_RESET_ID);
 	rules.put("globalRules", new JSONArray());
 	rules.put("goals", new JSONObject());
@@ -51,9 +51,9 @@ JSONObject createEmptyRules() {
 	return rules;
 }
 
-JSONObject createEmptyGoal(String resetId) {
+JSONObject createEmptyGoal() {
 	JSONObject goalRules = new JSONObject();
-	goalRules.put("resetId", resetId);
+
 	goalRules.put("description", "");
 	goalRules.put("firstStep", DEFAULT_FIRST_STEP);
 	goalRules.put("doneWhen", new JSONArray());
@@ -73,6 +73,7 @@ JSONObject loadRules(File rulesFile) {
 			return rules;
 		}
 
+        // when reset ID is different - reset rules
 		File backupFile = new File(rulesFile.getParentFile(), RULES_BACKUP_FILE_NAME);
 		if (backupFile.exists()) {
 			backupFile.delete();
@@ -90,29 +91,16 @@ JSONObject loadRules(File rulesFile) {
 	return emptyRules;
 }
 
-// Change the value returned for a goal to wipe the rules of that one goal, once: the next run finds the goal
-// saved under another id and starts it empty. Other goals and the global rules are left alone.
-// Like RULES_RESET_ID, the value is only a label.
-String goalResetId(String goal) {
-	if (goal.equals("oralb-devices")) {
-		return "2026-10-12 22:10";
-	}
-
-	return "";
-}
-
-JSONObject getOrCreateGoal(JSONObject rules, String goal, File rulesFile) {
+JSONObject getOrCreateGoal(JSONObject rules, String goalName, File rulesFile) {
 	JSONObject goals = rules.getJSONObject("goals");
-	JSONObject savedGoal = goals.optJSONObject(goal);
-	String resetId = goalResetId(goal);
-	boolean isGoalCurrent = savedGoal != null && savedGoal.optString("resetId").equals(resetId);
-	System.out.println("isGoalCurrent = `" + isGoalCurrent + "`");
-	if (!isGoalCurrent) {
-		goals.put(goal, createEmptyGoal(resetId));
+	boolean isGoalSaved = goals.optJSONObject(goalName) != null;
+	System.out.println("isGoalSaved = `" + isGoalSaved + "`");
+	if (!isGoalSaved) {
+		goals.put(goalName, createEmptyGoal());
 		writeFile(rulesFile, rules.toString(2));
 	}
 
-	return goals.getJSONObject(goal);
+	return goals.getJSONObject(goalName);
 }
 
 String cleanViewId(String viewId) {
@@ -218,7 +206,7 @@ JSONObject findMatchingRule(JSONArray rules, JSONObject screen) {
 
 String buildFilteredScreen(JSONObject screen) {
 	HashSet seenLines = new HashSet();
-	StringBuilder filtered = new StringBuilder();
+	StringBuilder filteredScreen = new StringBuilder();
 	Iterator keys = screen.keys();
 	while (keys.hasNext()) {
 		String viewId = (String) keys.next();
@@ -236,21 +224,21 @@ String buildFilteredScreen(JSONObject screen) {
 		String shownViewId = hasNoViewId(viewId) ? "" : shortViewId(cleanViewId(viewId));
 		String line = text + " | " + shownViewId;
 		if (seenLines.add(line)) {
-			filtered.append(line).append("\n");
+			filteredScreen.append(line).append("\n");
 		}
 	}
 
-	return filtered.toString();
+	return filteredScreen.toString();
 }
 
-String goal = magicText.evaluateString("{" + "lv=goal" + "}");
+String goalName = magicText.evaluateString("{" + "lv=goal_name" + "}");
 String currentStep = magicText.evaluateString("{" + "lv=current_step" + "}");
 
-System.out.println("goal = `" + goal + "`");
+System.out.println("goal_name = `" + goalName + "`");
 System.out.println("currentStep = `" + currentStep + "`");
 System.out.println();
 
-boolean done = false;
+boolean goalDone = false;
 boolean matchFound = false;
 boolean finishesGoal = false;
 String ruleId = "";
@@ -260,10 +248,10 @@ String filteredScreen = "";
 String matchError = "";
 
 try {
-	JSONObject screen = new JSONObject(magicText.evaluateString("{" + "lv=contents_str" + "}"));
+	JSONObject screen = new JSONObject(magicText.evaluateString("{" + "lv=contents_json" + "}"));
 	File rulesFile = new File(appContext.getFilesDir(), RULES_FILE_NAME);
 	JSONObject rules = loadRules(rulesFile);
-	JSONObject goalRules = getOrCreateGoal(rules, goal, rulesFile);
+	JSONObject goalRules = getOrCreateGoal(rules, goalName, rulesFile);
 	if (currentStep.length() == 0) {
 		currentStep = goalRules.getString("firstStep");
 		System.out.println("currentStep (from firstStep) = `" + currentStep + "`");
@@ -271,8 +259,8 @@ try {
 
 	filteredScreen = buildFilteredScreen(screen);
 	nextStep = currentStep;
-	done = isGoalDone(screen, goalRules.optJSONArray("doneWhen"));
-	if (!done) {
+	goalDone = isGoalDone(screen, goalRules.optJSONArray("doneWhen"));
+	if (!goalDone) {
 		JSONObject rule = findMatchingRule(rules.optJSONArray("globalRules"), screen);
 		boolean isGlobal = rule != null;
 		if (!isGlobal) {
@@ -297,7 +285,7 @@ try {
 	matchError = exception.toString();
 }
 
-System.out.println("done = `" + done + "`");
+System.out.println("goalDone = `" + goalDone + "`");
 System.out.println("matchFound = `" + matchFound + "`");
 System.out.println("finishesGoal = `" + finishesGoal + "`");
 System.out.println("ruleId = `" + ruleId + "`");
@@ -307,7 +295,7 @@ System.out.println("matchError = `" + matchError + "`");
 System.out.println("filteredScreen = `" + filteredScreen + "`");
 
 JSONObject result = new JSONObject();
-result.put("done", done);
+result.put("done", goalDone);
 result.put("match_found", matchFound);
 result.put("finishes_goal", finishesGoal);
 result.put("rule_id", ruleId);
@@ -316,6 +304,6 @@ result.put("next_step", nextStep);
 result.put("filtered_screen", filteredScreen);
 result.put("match_error", matchError);
 result.put("action", action);
-resultJson = result.toString();
+resultJSON = result.toString();
 
-resultJson;
+resultJSON; // Output Variable

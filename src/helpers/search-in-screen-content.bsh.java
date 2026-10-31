@@ -1,25 +1,24 @@
-/* MacroDroid: reads regex_to_search, contents_str (local variables, contents_str from get-current-screen-content.bsh); writes nothing; returns foundOnScreen (true when any text on screen matches the regex) */
+// Required local variables: regex_to_search, contents_json
 
 import java.util.Iterator;
 import java.util.regex.Pattern;
 import org.json.JSONObject;
 
 String regexToSearch = magicText.evaluateString("{" + "lv=regex_to_search" + "}");
-JSONObject screen = new JSONObject(magicText.evaluateString("{" + "lv=contents_str" + "}"));
-Pattern pattern = Pattern.compile(regexToSearch);
-
+JSONObject screenContents = new JSONObject(magicText.evaluateString("{" + "lv=contents_json" + "}"));
 System.out.println("regex_to_search = `" + regexToSearch + "`");
+System.out.println("contents_json = `" +screenContents + "`");
 
+Pattern pattern = Pattern.compile(regexToSearch);
 boolean foundOnScreen = false;
-Iterator keys = screen.keys();
+Iterator keys = screenContents.keys();
 
 while (keys.hasNext() && !foundOnScreen) {
-	String text = screen.optString((String) keys.next());
-
+	String text = screenContents.optString((String) keys.next());
 	foundOnScreen = pattern.matcher(text).find();
 }
 
-System.out.println("screen texts count = `" + screen.length() + "`");
+System.out.println("screen texts count = `" + screenContents.length() + "`");
 System.out.println("foundOnScreen = `" + foundOnScreen + "`");
 
-foundOnScreen;
+foundOnScreen; // Output Variable

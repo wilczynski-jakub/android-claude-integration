@@ -19,7 +19,7 @@
                 "m_booleanValue": false,
                 "m_decimalValue": 0.0,
                 "m_intValue": 0,
-                "m_name": "goal",
+                "m_name": "goal_name",
                 "m_stringValue": "",
                 "m_type": 2,
                 "supportsInput": false,
@@ -159,7 +159,7 @@
                 "m_booleanValue": false,
                 "m_decimalValue": 0.0,
                 "m_intValue": 0,
-                "m_name": "state_str",
+                "m_name": "agent_memory_json",
                 "m_stringValue": "",
                 "m_type": 2,
                 "supportsInput": false,
@@ -239,7 +239,7 @@
                 "m_booleanValue": false,
                 "m_decimalValue": 0.0,
                 "m_intValue": 0,
-                "m_name": "match_str",
+                "m_name": "match_json",
                 "m_stringValue": "",
                 "m_type": 2,
                 "supportsInput": false,
@@ -259,7 +259,7 @@
                 "m_booleanValue": false,
                 "m_decimalValue": 0.0,
                 "m_intValue": 0,
-                "m_name": "save_str",
+                "m_name": "save_json",
                 "m_stringValue": "",
                 "m_type": 2,
                 "supportsInput": false,
@@ -319,7 +319,7 @@
                 "m_booleanValue": false,
                 "m_decimalValue": 0.0,
                 "m_intValue": 0,
-                "m_name": "rules_json",
+                "m_name": "rule_result_json",
                 "m_stringValue": "",
                 "m_type": 2,
                 "supportsInput": false,
@@ -379,7 +379,7 @@
                 "m_booleanValue": false,
                 "m_decimalValue": 0.0,
                 "m_intValue": 0,
-                "m_name": "contents_str",
+                "m_name": "contents_json",
                 "m_stringValue": "",
                 "m_type": 2,
                 "supportsInput": false,
@@ -399,49 +399,9 @@
                 "m_booleanValue": false,
                 "m_decimalValue": 0.0,
                 "m_intValue": 0,
-                "m_name": "action_type",
+                "m_name": "action_dict",
                 "m_stringValue": "",
-                "m_type": 2,
-                "supportsInput": false,
-                "supportsOutput": false
-            },
-            {
-                "description": "",
-                "dictionary": {
-                    "entries": [],
-                    "isArray": false,
-                    "variableType": 4,
-                    "type": "Dictionary"
-                },
-                "isActionBlockWorkingVar": false,
-                "isLocalVar": true,
-                "isSecure": false,
-                "m_booleanValue": false,
-                "m_decimalValue": 0.0,
-                "m_intValue": 0,
-                "m_name": "action_view_id",
-                "m_stringValue": "",
-                "m_type": 2,
-                "supportsInput": false,
-                "supportsOutput": false
-            },
-            {
-                "description": "",
-                "dictionary": {
-                    "entries": [],
-                    "isArray": false,
-                    "variableType": 4,
-                    "type": "Dictionary"
-                },
-                "isActionBlockWorkingVar": false,
-                "isLocalVar": true,
-                "isSecure": false,
-                "m_booleanValue": false,
-                "m_decimalValue": 0.0,
-                "m_intValue": 0,
-                "m_name": "action_seconds",
-                "m_stringValue": "",
-                "m_type": 1,
+                "m_type": 4,
                 "supportsInput": false,
                 "supportsOutput": false
             },
@@ -761,7 +721,7 @@
                     "m_booleanValue": false,
                     "m_decimalValue": 0.0,
                     "m_intValue": 0,
-                    "m_name": "goal",
+                    "m_name": "goal_name",
                     "m_stringValue": "",
                     "m_type": 2,
                     "supportsInput": false,
@@ -971,7 +931,7 @@
                 "m_isOrCondition": false
             },
             {
-                "filename": "run-multiple-ui-actions.bsh",
+                "filename": "plan-next-step.bsh",
                 "pathName": "/out",
                 "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
                 "staticFilename": false,
@@ -1086,7 +1046,7 @@
                 "m_constraintList": [],
                 "m_isDisabled": false,
                 "m_isOrCondition": false,
-                "responseVariableName": "contents_str"
+                "responseVariableName": "contents_json"
             },
             {
                 "filename": "match-an-existing-rule.bsh",
@@ -1110,7 +1070,7 @@
                 "m_constraintList": [],
                 "m_isDisabled": false,
                 "m_isOrCondition": false,
-                "responseVariableName": "match_str"
+                "responseVariableName": "match_json"
             },
             {
                 "dontLogIfConditionIsFalse": false,
@@ -1307,7 +1267,7 @@
                 "m_constraintList": [],
                 "m_isDisabled": false,
                 "m_isOrCondition": false,
-                "responseVariableName": "contents_str"
+                "responseVariableName": "contents_json"
             },
             {
                 "filename": "save-a-new-rule.bsh",
@@ -1331,7 +1291,7 @@
                 "m_constraintList": [],
                 "m_isDisabled": false,
                 "m_isOrCondition": false,
-                "responseVariableName": "save_str"
+                "responseVariableName": "save_json"
             },
             {
                 "dontLogIfConditionIsFalse": false,
@@ -1445,7 +1405,7 @@
                     "m_booleanValue": false,
                     "m_decimalValue": 0.0,
                     "m_intValue": 0,
-                    "m_name": "rules_json",
+                    "m_name": "rule_result_json",
                     "m_stringValue": "",
                     "m_type": 2,
                     "supportsInput": false,
@@ -1456,10 +1416,10 @@
                 "m_constraintList": [],
                 "m_isDisabled": false,
                 "m_isOrCondition": false,
-                "m_newStringValue": "{lv=match_str}"
+                "m_newStringValue": "{lv=match_json}"
             },
             {
-                "filename": "run-a-single-ui-action.bsh",
+                "filename": "extract-rule-action.bsh",
                 "pathName": "/out",
                 "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
                 "staticFilename": false,
@@ -1500,7 +1460,9 @@
                     {
                         "checkCase": true,
                         "dictionaryKeys": {
-                            "keys": []
+                            "keys": [
+                                "type"
+                            ]
                         },
                         "dictionaryType": 2,
                         "enableRegex": false,
@@ -1524,9 +1486,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -1546,9 +1508,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -1573,7 +1535,7 @@
                     "skipCount": "0",
                     "textMatchOption": 0,
                     "useRegex": false,
-                    "viewId": "{lv=action_view_id}",
+                    "viewId": "{lv=action_dict[view_id]}",
                     "xyPercentages": false,
                     "type": "Click"
                 },
@@ -1602,7 +1564,9 @@
                     {
                         "checkCase": true,
                         "dictionaryKeys": {
-                            "keys": []
+                            "keys": [
+                                "type"
+                            ]
                         },
                         "dictionaryType": 2,
                         "enableRegex": false,
@@ -1626,9 +1590,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -1648,9 +1612,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -1690,7 +1654,9 @@
                     {
                         "checkCase": true,
                         "dictionaryKeys": {
-                            "keys": []
+                            "keys": [
+                                "type"
+                            ]
                         },
                         "dictionaryType": 2,
                         "enableRegex": false,
@@ -1714,9 +1680,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -1736,9 +1702,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -1770,13 +1736,18 @@
                     "m_booleanValue": false,
                     "m_decimalValue": 0.0,
                     "m_intValue": 0,
-                    "m_name": "action_seconds",
+                    "m_name": "action_dict",
                     "m_stringValue": "",
-                    "m_type": 1,
+                    "m_type": 4,
                     "supportsInput": false,
                     "supportsOutput": false
                 },
                 "unitForVariables": 0,
+                "varDictionaryKeys": {
+                    "keys": [
+                        "seconds"
+                    ]
+                },
                 "disableLogging": false,
                 "m_classType": "PauseAction",
                 "m_constraintList": [],
@@ -1902,7 +1873,7 @@
                     "m_booleanValue": false,
                     "m_decimalValue": 0.0,
                     "m_intValue": 0,
-                    "m_name": "rules_json",
+                    "m_name": "rule_result_json",
                     "m_stringValue": "",
                     "m_type": 2,
                     "supportsInput": false,
@@ -1913,10 +1884,10 @@
                 "m_constraintList": [],
                 "m_isDisabled": false,
                 "m_isOrCondition": false,
-                "m_newStringValue": "{lv=save_str}"
+                "m_newStringValue": "{lv=save_json}"
             },
             {
-                "filename": "run-a-single-ui-action.bsh",
+                "filename": "extract-rule-action.bsh",
                 "pathName": "/out",
                 "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
                 "staticFilename": false,
@@ -1957,7 +1928,9 @@
                     {
                         "checkCase": true,
                         "dictionaryKeys": {
-                            "keys": []
+                            "keys": [
+                                "type"
+                            ]
                         },
                         "dictionaryType": 2,
                         "enableRegex": false,
@@ -1981,9 +1954,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -2003,9 +1976,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -2030,7 +2003,7 @@
                     "skipCount": "0",
                     "textMatchOption": 0,
                     "useRegex": false,
-                    "viewId": "{lv=action_view_id}",
+                    "viewId": "{lv=action_dict[view_id]}",
                     "xyPercentages": false,
                     "type": "Click"
                 },
@@ -2059,7 +2032,9 @@
                     {
                         "checkCase": true,
                         "dictionaryKeys": {
-                            "keys": []
+                            "keys": [
+                                "type"
+                            ]
                         },
                         "dictionaryType": 2,
                         "enableRegex": false,
@@ -2083,9 +2058,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -2105,9 +2080,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -2147,7 +2122,9 @@
                     {
                         "checkCase": true,
                         "dictionaryKeys": {
-                            "keys": []
+                            "keys": [
+                                "type"
+                            ]
                         },
                         "dictionaryType": 2,
                         "enableRegex": false,
@@ -2171,9 +2148,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -2193,9 +2170,9 @@
                             "m_booleanValue": false,
                             "m_decimalValue": 0.0,
                             "m_intValue": 0,
-                            "m_name": "action_type",
+                            "m_name": "action_dict",
                             "m_stringValue": "",
-                            "m_type": 2,
+                            "m_type": 4,
                             "supportsInput": false,
                             "supportsOutput": false
                         },
@@ -2227,13 +2204,18 @@
                     "m_booleanValue": false,
                     "m_decimalValue": 0.0,
                     "m_intValue": 0,
-                    "m_name": "action_seconds",
+                    "m_name": "action_dict",
                     "m_stringValue": "",
-                    "m_type": 1,
+                    "m_type": 4,
                     "supportsInput": false,
                     "supportsOutput": false
                 },
                 "unitForVariables": 0,
+                "varDictionaryKeys": {
+                    "keys": [
+                        "seconds"
+                    ]
+                },
                 "disableLogging": false,
                 "m_classType": "PauseAction",
                 "m_constraintList": [],

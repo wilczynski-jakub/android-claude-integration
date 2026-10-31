@@ -1,4 +1,4 @@
-/* MacroDroid: reads local goal, current_step, response_text, contents_str, file rules.json; writes file rules.json; returns resultJson */
+// Required local variables: goal_name, current_step, response_text, contents_json
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.util.Iterator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-String resultJson = "";
+String resultJSON = "";
 
 String RULES_FILE_NAME = "rules.json";
 String DEFAULT_FIRST_STEP = "start";
@@ -47,18 +47,18 @@ JSONObject loadRules(File rulesFile) {
 	return new JSONObject(readFile(rulesFile));
 }
 
-JSONObject getOrCreateGoal(JSONObject rules, String goal) {
+JSONObject getOrCreateGoal(JSONObject rules, String goalName) {
 	JSONObject goals = rules.getJSONObject("goals");
-	if (!goals.has(goal)) {
+	if (!goals.has(goalName)) {
 		JSONObject goalRules = new JSONObject();
 		goalRules.put("description", "");
 		goalRules.put("firstStep", DEFAULT_FIRST_STEP);
 		goalRules.put("doneWhen", new JSONArray());
 		goalRules.put("steps", new JSONObject());
-		goals.put(goal, goalRules);
+		goals.put(goalName, goalRules);
 	}
 
-	return goals.getJSONObject(goal);
+	return goals.getJSONObject(goalName);
 }
 
 // MacroDroid keys an element that has no view id by its position on the screen ("index:26").
@@ -120,13 +120,13 @@ JSONObject resolveAction(JSONObject ruleAction, JSONObject screen) {
 }
 
 JSONObject parseResponse(String responseText) {
-	int start = responseText.indexOf("{");
-	int end = responseText.lastIndexOf("}");
-	if (start < 0 || end <= start) {
+	int jsonStart = responseText.indexOf("{");
+	int jsonEnd = responseText.lastIndexOf("}");
+	if (jsonStart < 0 || jsonEnd <= jsonStart) {
 		throw new Exception("No JSON object in response");
 	}
 
-	return new JSONObject(responseText.substring(start, end + 1));
+	return new JSONObject(responseText.substring(jsonStart, jsonEnd + 1));
 }
 
 String validateRule(JSONObject rule, JSONObject screen) {
@@ -178,11 +178,11 @@ JSONArray getOrCreateStepRules(JSONObject goalRules, String step) {
 	return steps.getJSONArray(step);
 }
 
-String goal = magicText.evaluateString("{" + "lv=goal" + "}");
+String goalName = magicText.evaluateString("{" + "lv=goal_name" + "}");
 String currentStep = magicText.evaluateString("{" + "lv=current_step" + "}");
 String responseText = magicText.evaluateString("{" + "lv=response_text" + "}");
 
-System.out.println("goal = `" + goal + "`");
+System.out.println("goal_name = `" + goalName + "`");
 System.out.println("currentStep = `" + currentStep + "`");
 System.out.println("responseText = `" + responseText + "`");
 System.out.println();
@@ -197,10 +197,10 @@ boolean goalDone = false;
 boolean finishesGoal = false;
 
 try {
-	JSONObject screen = new JSONObject(magicText.evaluateString("{" + "lv=contents_str" + "}"));
+	JSONObject screen = new JSONObject(magicText.evaluateString("{" + "lv=contents_json" + "}"));
 	File rulesFile = new File(appContext.getFilesDir(), RULES_FILE_NAME);
 	JSONObject rules = loadRules(rulesFile);
-	JSONObject goalRules = getOrCreateGoal(rules, goal);
+	JSONObject goalRules = getOrCreateGoal(rules, goalName);
 	if (currentStep.length() == 0) {
 		currentStep = goalRules.getString("firstStep");
 		nextStep = currentStep;
@@ -302,7 +302,7 @@ result.put("rule_id", ruleId);
 result.put("next_step", nextStep);
 result.put("action", action);
 result.put("save_error", saveError);
-resultJson = result.toString();
+resultJSON = result.toString();
 
-resultJson;
+resultJSON; // Output Variable
 
