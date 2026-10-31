@@ -1,0 +1,2594 @@
+{
+    "globalVariables": [],
+    "macro": {
+        "isActionBlock": false,
+        "isExtra": false,
+        "isFavourite": false,
+        "localVariables": [
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "goal",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "goal_description",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "max_api_calls",
+                "m_stringValue": "",
+                "m_type": 1,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "timeout_mins",
+                "m_stringValue": "",
+                "m_type": 1,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "success",
+                "m_stringValue": "",
+                "m_type": 0,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "call",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "message",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "state_str",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "current_step",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "prompt",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "system_prompt",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "match_str",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "save_str",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "response_text",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "user_instruction",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "rules_json",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "ask_success",
+                "m_stringValue": "",
+                "m_type": 0,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "exec_success",
+                "m_stringValue": "",
+                "m_type": 0,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "contents_str",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "action_type",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "action_view_id",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "action_seconds",
+                "m_stringValue": "",
+                "m_type": 1,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "response_return_code",
+                "m_stringValue": "",
+                "m_type": 1,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "response_output",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "request_body",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "input_tokens",
+                "m_stringValue": "",
+                "m_type": 1,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "output_tokens",
+                "m_stringValue": "",
+                "m_type": 1,
+                "supportsInput": false,
+                "supportsOutput": false
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "code_content",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": false
+            }
+        ],
+        "localVarsAlphabetical": true,
+        "loggingLevel": 0,
+        "m_actionList": [
+            {
+                "booleanDictionaryKeys": {
+                    "keys": []
+                },
+                "dictionaryKeys": [],
+                "dictionaryOrArrayType": -1,
+                "existingManualKeyType": 0,
+                "m_booleanInvert": false,
+                "m_darkMode": -1,
+                "m_doubleRandomMax": 0.0,
+                "m_doubleRandomMin": 0.0,
+                "m_falseLabel": "False",
+                "m_intExpression": false,
+                "m_intRandom": false,
+                "m_intRandomMax": 0,
+                "m_intRandomMin": 0,
+                "m_intValueDecrement": false,
+                "m_intValueIncrement": false,
+                "m_newBooleanValue": false,
+                "m_newDoubleValue": 0.0,
+                "m_newIntValue": 0,
+                "m_trueLabel": "True",
+                "m_userPrompt": false,
+                "m_userPromptEmptyAtStart": false,
+                "m_userPromptPassword": false,
+                "m_userPromptPasswordToggle": false,
+                "m_userPromptShowCancel": true,
+                "m_userPromptStopAfterCancel": true,
+                "m_variable": {
+                    "description": "",
+                    "dictionary": {
+                        "entries": [],
+                        "isArray": false,
+                        "variableType": 4,
+                        "type": "Dictionary"
+                    },
+                    "isActionBlockWorkingVar": false,
+                    "isLocalVar": true,
+                    "isSecure": false,
+                    "m_booleanValue": false,
+                    "m_decimalValue": 0.0,
+                    "m_intValue": 0,
+                    "m_name": "message",
+                    "m_stringValue": "",
+                    "m_type": 2,
+                    "supportsInput": false,
+                    "supportsOutput": false
+                },
+                "disableLogging": false,
+                "m_classType": "SetVariableAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false,
+                "m_newStringValue": "What should the UI agent do?"
+            },
+            {
+                "filename": "ask-user-for-instruction.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false,
+                "responseVariableName": "user_instruction"
+            },
+            {
+                "childrenCollapsed": false,
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "IfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "user_instruction",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": false,
+                        "m_stringValue": "",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "user_instruction",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "booleanDictionaryKeys": {
+                    "keys": []
+                },
+                "dictionaryKeys": [],
+                "dictionaryOrArrayType": -1,
+                "existingManualKeyType": 0,
+                "m_booleanInvert": false,
+                "m_darkMode": -1,
+                "m_doubleRandomMax": 0.0,
+                "m_doubleRandomMin": 0.0,
+                "m_falseLabel": "False",
+                "m_intExpression": false,
+                "m_intRandom": false,
+                "m_intRandomMax": 0,
+                "m_intRandomMin": 0,
+                "m_intValueDecrement": false,
+                "m_intValueIncrement": false,
+                "m_newBooleanValue": false,
+                "m_newDoubleValue": 0.0,
+                "m_newIntValue": 0,
+                "m_trueLabel": "True",
+                "m_userPrompt": false,
+                "m_userPromptEmptyAtStart": false,
+                "m_userPromptPassword": false,
+                "m_userPromptPasswordToggle": false,
+                "m_userPromptShowCancel": true,
+                "m_userPromptStopAfterCancel": true,
+                "m_variable": {
+                    "description": "",
+                    "dictionary": {
+                        "entries": [],
+                        "isArray": false,
+                        "variableType": 4,
+                        "type": "Dictionary"
+                    },
+                    "isActionBlockWorkingVar": false,
+                    "isLocalVar": true,
+                    "isSecure": false,
+                    "m_booleanValue": false,
+                    "m_decimalValue": 0.0,
+                    "m_intValue": 0,
+                    "m_name": "goal",
+                    "m_stringValue": "",
+                    "m_type": 2,
+                    "supportsInput": false,
+                    "supportsOutput": false
+                },
+                "disableLogging": false,
+                "m_classType": "SetVariableAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false,
+                "m_newStringValue": "{lv=user_instruction}"
+            },
+            {
+                "booleanDictionaryKeys": {
+                    "keys": []
+                },
+                "dictionaryKeys": [],
+                "dictionaryOrArrayType": -1,
+                "existingManualKeyType": 0,
+                "m_booleanInvert": false,
+                "m_darkMode": -1,
+                "m_doubleRandomMax": 0.0,
+                "m_doubleRandomMin": 0.0,
+                "m_falseLabel": "False",
+                "m_intExpression": false,
+                "m_intRandom": false,
+                "m_intRandomMax": 0,
+                "m_intRandomMin": 0,
+                "m_intValueDecrement": false,
+                "m_intValueIncrement": false,
+                "m_newBooleanValue": false,
+                "m_newDoubleValue": 0.0,
+                "m_newIntValue": 0,
+                "m_trueLabel": "True",
+                "m_userPrompt": false,
+                "m_userPromptEmptyAtStart": false,
+                "m_userPromptPassword": false,
+                "m_userPromptPasswordToggle": false,
+                "m_userPromptShowCancel": true,
+                "m_userPromptStopAfterCancel": true,
+                "m_variable": {
+                    "description": "",
+                    "dictionary": {
+                        "entries": [],
+                        "isArray": false,
+                        "variableType": 4,
+                        "type": "Dictionary"
+                    },
+                    "isActionBlockWorkingVar": false,
+                    "isLocalVar": true,
+                    "isSecure": false,
+                    "m_booleanValue": false,
+                    "m_decimalValue": 0.0,
+                    "m_intValue": 0,
+                    "m_name": "goal_description",
+                    "m_stringValue": "",
+                    "m_type": 2,
+                    "supportsInput": false,
+                    "supportsOutput": false
+                },
+                "disableLogging": false,
+                "m_classType": "SetVariableAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false,
+                "m_newStringValue": "{lv=user_instruction}"
+            },
+            {
+                "booleanDictionaryKeys": {
+                    "keys": []
+                },
+                "dictionaryKeys": [],
+                "dictionaryOrArrayType": -1,
+                "existingManualKeyType": 0,
+                "m_booleanInvert": false,
+                "m_darkMode": -1,
+                "m_doubleRandomMax": 0.0,
+                "m_doubleRandomMin": 0.0,
+                "m_falseLabel": "False",
+                "m_intExpression": false,
+                "m_intRandom": false,
+                "m_intRandomMax": 0,
+                "m_intRandomMin": 0,
+                "m_intValueDecrement": false,
+                "m_intValueIncrement": false,
+                "m_newBooleanValue": false,
+                "m_newDoubleValue": 0.0,
+                "m_newIntValue": 10,
+                "m_trueLabel": "True",
+                "m_userPrompt": false,
+                "m_userPromptEmptyAtStart": false,
+                "m_userPromptPassword": false,
+                "m_userPromptPasswordToggle": false,
+                "m_userPromptShowCancel": true,
+                "m_userPromptStopAfterCancel": true,
+                "m_variable": {
+                    "description": "",
+                    "dictionary": {
+                        "entries": [],
+                        "isArray": false,
+                        "variableType": 4,
+                        "type": "Dictionary"
+                    },
+                    "isActionBlockWorkingVar": false,
+                    "isLocalVar": true,
+                    "isSecure": false,
+                    "m_booleanValue": false,
+                    "m_decimalValue": 0.0,
+                    "m_intValue": 0,
+                    "m_name": "max_api_calls",
+                    "m_stringValue": "",
+                    "m_type": 1,
+                    "supportsInput": false,
+                    "supportsOutput": false
+                },
+                "disableLogging": false,
+                "m_classType": "SetVariableAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "booleanDictionaryKeys": {
+                    "keys": []
+                },
+                "dictionaryKeys": [],
+                "dictionaryOrArrayType": -1,
+                "existingManualKeyType": 0,
+                "m_booleanInvert": false,
+                "m_darkMode": -1,
+                "m_doubleRandomMax": 0.0,
+                "m_doubleRandomMin": 0.0,
+                "m_falseLabel": "False",
+                "m_intExpression": false,
+                "m_intRandom": false,
+                "m_intRandomMax": 0,
+                "m_intRandomMin": 0,
+                "m_intValueDecrement": false,
+                "m_intValueIncrement": false,
+                "m_newBooleanValue": false,
+                "m_newDoubleValue": 0.0,
+                "m_newIntValue": 5,
+                "m_trueLabel": "True",
+                "m_userPrompt": false,
+                "m_userPromptEmptyAtStart": false,
+                "m_userPromptPassword": false,
+                "m_userPromptPasswordToggle": false,
+                "m_userPromptShowCancel": true,
+                "m_userPromptStopAfterCancel": true,
+                "m_variable": {
+                    "description": "",
+                    "dictionary": {
+                        "entries": [],
+                        "isArray": false,
+                        "variableType": 4,
+                        "type": "Dictionary"
+                    },
+                    "isActionBlockWorkingVar": false,
+                    "isLocalVar": true,
+                    "isSecure": false,
+                    "m_booleanValue": false,
+                    "m_decimalValue": 0.0,
+                    "m_intValue": 0,
+                    "m_name": "timeout_mins",
+                    "m_stringValue": "",
+                    "m_type": 1,
+                    "supportsInput": false,
+                    "supportsOutput": false
+                },
+                "disableLogging": false,
+                "m_classType": "SetVariableAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "m_fixedOptionCount": 5,
+                "m_option": 4,
+                "timedDurationValue": 0,
+                "timedTimeUnit": 1,
+                "timedVariable": {
+                    "description": "",
+                    "dictionary": {
+                        "entries": [],
+                        "isArray": false,
+                        "variableType": 4,
+                        "type": "Dictionary"
+                    },
+                    "isActionBlockWorkingVar": false,
+                    "isLocalVar": true,
+                    "isSecure": false,
+                    "m_booleanValue": false,
+                    "m_decimalValue": 0.0,
+                    "m_intValue": 0,
+                    "m_name": "timeout_mins",
+                    "m_stringValue": "",
+                    "m_type": 1,
+                    "supportsInput": false,
+                    "supportsOutput": false
+                },
+                "childrenCollapsed": false,
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "LoopAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "filename": "run-multiple-ui-actions.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "childrenCollapsed": false,
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "IfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "MATCH",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "filename": "get-current-screen-content.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false,
+                "responseVariableName": "contents_str"
+            },
+            {
+                "filename": "match-an-existing-rule.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false,
+                "responseVariableName": "match_str"
+            },
+            {
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "ElseIfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "ASK",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "filename": "ask-claude.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "variableSetter.setBoolean(\"ask_success\", magicText.evaluateBoolean(\"{\" + \"lv=success\" + \"}\"));",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "ElseIfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "SAVE",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "filename": "get-current-screen-content.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false,
+                "responseVariableName": "contents_str"
+            },
+            {
+                "filename": "save-a-new-rule.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false,
+                "responseVariableName": "save_str"
+            },
+            {
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "ElseIfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "EXECUTE_MATCH",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "booleanDictionaryKeys": {
+                    "keys": []
+                },
+                "dictionaryKeys": [],
+                "dictionaryOrArrayType": -1,
+                "existingManualKeyType": 0,
+                "m_booleanInvert": false,
+                "m_darkMode": -1,
+                "m_doubleRandomMax": 0.0,
+                "m_doubleRandomMin": 0.0,
+                "m_falseLabel": "False",
+                "m_intExpression": false,
+                "m_intRandom": false,
+                "m_intRandomMax": 0,
+                "m_intRandomMin": 0,
+                "m_intValueDecrement": false,
+                "m_intValueIncrement": false,
+                "m_newBooleanValue": false,
+                "m_newDoubleValue": 0.0,
+                "m_newIntValue": 0,
+                "m_trueLabel": "True",
+                "m_userPrompt": false,
+                "m_userPromptEmptyAtStart": false,
+                "m_userPromptPassword": false,
+                "m_userPromptPasswordToggle": false,
+                "m_userPromptShowCancel": true,
+                "m_userPromptStopAfterCancel": true,
+                "m_variable": {
+                    "description": "",
+                    "dictionary": {
+                        "entries": [],
+                        "isArray": false,
+                        "variableType": 4,
+                        "type": "Dictionary"
+                    },
+                    "isActionBlockWorkingVar": false,
+                    "isLocalVar": true,
+                    "isSecure": false,
+                    "m_booleanValue": false,
+                    "m_decimalValue": 0.0,
+                    "m_intValue": 0,
+                    "m_name": "rules_json",
+                    "m_stringValue": "",
+                    "m_type": 2,
+                    "supportsInput": false,
+                    "supportsOutput": false
+                },
+                "disableLogging": false,
+                "m_classType": "SetVariableAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false,
+                "m_newStringValue": "{lv=match_str}"
+            },
+            {
+                "filename": "run-a-single-ui-action.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "variableSetter.setBoolean(\"exec_success\", magicText.evaluateBoolean(\"{\" + \"lv=success\" + \"}\"));",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "childrenCollapsed": false,
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "IfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "CLICK",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "action": 0,
+                "uiInteractionConfiguration": {
+                    "blocking": true,
+                    "checkOverlays": false,
+                    "clickOption": 4,
+                    "longClick": false,
+                    "showTouchLocation": false,
+                    "skipCount": "0",
+                    "textMatchOption": 0,
+                    "useRegex": false,
+                    "viewId": "{lv=action_view_id}",
+                    "xyPercentages": false,
+                    "type": "Click"
+                },
+                "disableLogging": false,
+                "m_classType": "UIInteractionAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "m_delayInMilliSeconds": 0,
+                "m_delayInSeconds": 3,
+                "m_useAlarm": true,
+                "unitForVariables": 0,
+                "disableLogging": false,
+                "m_classType": "PauseAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "ElseIfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "BACK",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "disableLogging": false,
+                "m_classType": "PressBackAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "m_delayInMilliSeconds": 0,
+                "m_delayInSeconds": 3,
+                "m_useAlarm": true,
+                "unitForVariables": 0,
+                "disableLogging": false,
+                "m_classType": "PauseAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "ElseIfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "WAIT",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "m_delayInMilliSeconds": 0,
+                "m_delayInSeconds": 1,
+                "m_useAlarm": true,
+                "m_variable": {
+                    "description": "",
+                    "dictionary": {
+                        "entries": [],
+                        "isArray": false,
+                        "variableType": 4,
+                        "type": "Dictionary"
+                    },
+                    "isActionBlockWorkingVar": false,
+                    "isLocalVar": true,
+                    "isSecure": false,
+                    "m_booleanValue": false,
+                    "m_decimalValue": 0.0,
+                    "m_intValue": 0,
+                    "m_name": "action_seconds",
+                    "m_stringValue": "",
+                    "m_type": 1,
+                    "supportsInput": false,
+                    "supportsOutput": false
+                },
+                "unitForVariables": 0,
+                "disableLogging": false,
+                "m_classType": "PauseAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "disableLogging": false,
+                "m_classType": "EndIfAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "ElseIfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "EXECUTE_SAVED",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "booleanDictionaryKeys": {
+                    "keys": []
+                },
+                "dictionaryKeys": [],
+                "dictionaryOrArrayType": -1,
+                "existingManualKeyType": 0,
+                "m_booleanInvert": false,
+                "m_darkMode": -1,
+                "m_doubleRandomMax": 0.0,
+                "m_doubleRandomMin": 0.0,
+                "m_falseLabel": "False",
+                "m_intExpression": false,
+                "m_intRandom": false,
+                "m_intRandomMax": 0,
+                "m_intRandomMin": 0,
+                "m_intValueDecrement": false,
+                "m_intValueIncrement": false,
+                "m_newBooleanValue": false,
+                "m_newDoubleValue": 0.0,
+                "m_newIntValue": 0,
+                "m_trueLabel": "True",
+                "m_userPrompt": false,
+                "m_userPromptEmptyAtStart": false,
+                "m_userPromptPassword": false,
+                "m_userPromptPasswordToggle": false,
+                "m_userPromptShowCancel": true,
+                "m_userPromptStopAfterCancel": true,
+                "m_variable": {
+                    "description": "",
+                    "dictionary": {
+                        "entries": [],
+                        "isArray": false,
+                        "variableType": 4,
+                        "type": "Dictionary"
+                    },
+                    "isActionBlockWorkingVar": false,
+                    "isLocalVar": true,
+                    "isSecure": false,
+                    "m_booleanValue": false,
+                    "m_decimalValue": 0.0,
+                    "m_intValue": 0,
+                    "m_name": "rules_json",
+                    "m_stringValue": "",
+                    "m_type": 2,
+                    "supportsInput": false,
+                    "supportsOutput": false
+                },
+                "disableLogging": false,
+                "m_classType": "SetVariableAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false,
+                "m_newStringValue": "{lv=save_str}"
+            },
+            {
+                "filename": "run-a-single-ui-action.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "variableSetter.setBoolean(\"exec_success\", magicText.evaluateBoolean(\"{\" + \"lv=success\" + \"}\"));",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "childrenCollapsed": false,
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "IfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "CLICK",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "action": 0,
+                "uiInteractionConfiguration": {
+                    "blocking": true,
+                    "checkOverlays": false,
+                    "clickOption": 4,
+                    "longClick": false,
+                    "showTouchLocation": false,
+                    "skipCount": "0",
+                    "textMatchOption": 0,
+                    "useRegex": false,
+                    "viewId": "{lv=action_view_id}",
+                    "xyPercentages": false,
+                    "type": "Click"
+                },
+                "disableLogging": false,
+                "m_classType": "UIInteractionAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "m_delayInMilliSeconds": 0,
+                "m_delayInSeconds": 3,
+                "m_useAlarm": true,
+                "unitForVariables": 0,
+                "disableLogging": false,
+                "m_classType": "PauseAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "ElseIfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "BACK",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "disableLogging": false,
+                "m_classType": "PressBackAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "m_delayInMilliSeconds": 0,
+                "m_delayInSeconds": 3,
+                "m_useAlarm": true,
+                "unitForVariables": 0,
+                "disableLogging": false,
+                "m_classType": "PauseAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "ElseIfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "WAIT",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "action_type",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "m_delayInMilliSeconds": 0,
+                "m_delayInSeconds": 1,
+                "m_useAlarm": true,
+                "m_variable": {
+                    "description": "",
+                    "dictionary": {
+                        "entries": [],
+                        "isArray": false,
+                        "variableType": 4,
+                        "type": "Dictionary"
+                    },
+                    "isActionBlockWorkingVar": false,
+                    "isLocalVar": true,
+                    "isSecure": false,
+                    "m_booleanValue": false,
+                    "m_decimalValue": 0.0,
+                    "m_intValue": 0,
+                    "m_name": "action_seconds",
+                    "m_stringValue": "",
+                    "m_type": 1,
+                    "supportsInput": false,
+                    "supportsOutput": false
+                },
+                "unitForVariables": 0,
+                "disableLogging": false,
+                "m_classType": "PauseAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "disableLogging": false,
+                "m_classType": "EndIfAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "ElseIfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "DONE",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "booleanDictionaryKeys": {
+                    "keys": []
+                },
+                "dictionaryKeys": [],
+                "dictionaryOrArrayType": -1,
+                "existingManualKeyType": 0,
+                "m_booleanInvert": false,
+                "m_darkMode": -1,
+                "m_doubleRandomMax": 0.0,
+                "m_doubleRandomMin": 0.0,
+                "m_falseLabel": "False",
+                "m_intExpression": false,
+                "m_intRandom": false,
+                "m_intRandomMax": 0,
+                "m_intRandomMin": 0,
+                "m_intValueDecrement": false,
+                "m_intValueIncrement": false,
+                "m_newBooleanValue": true,
+                "m_newDoubleValue": 0.0,
+                "m_newIntValue": 0,
+                "m_trueLabel": "True",
+                "m_userPrompt": false,
+                "m_userPromptEmptyAtStart": false,
+                "m_userPromptPassword": false,
+                "m_userPromptPasswordToggle": false,
+                "m_userPromptShowCancel": true,
+                "m_userPromptStopAfterCancel": true,
+                "m_variable": {
+                    "description": "",
+                    "dictionary": {
+                        "entries": [],
+                        "isArray": false,
+                        "variableType": 4,
+                        "type": "Dictionary"
+                    },
+                    "isActionBlockWorkingVar": false,
+                    "isLocalVar": true,
+                    "isSecure": false,
+                    "m_booleanValue": false,
+                    "m_decimalValue": 0.0,
+                    "m_intValue": 0,
+                    "m_name": "success",
+                    "m_stringValue": "",
+                    "m_type": 0,
+                    "supportsInput": false,
+                    "supportsOutput": false
+                },
+                "disableLogging": false,
+                "m_classType": "SetVariableAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "disableLogging": false,
+                "m_classType": "BreakFromLoopAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "ElseIfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "ERROR",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "call",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "filename": "ask-user-for-instruction.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false,
+                "responseVariableName": "user_instruction"
+            },
+            {
+                "childrenCollapsed": false,
+                "dontLogIfConditionIsFalse": false,
+                "disableLogging": false,
+                "m_classType": "IfConditionAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": true,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "dictionaryType": 2,
+                        "enableRegex": false,
+                        "m_booleanValue": false,
+                        "m_doubleValue": 0.0,
+                        "m_intCompareVariable": false,
+                        "m_intGreaterThan": false,
+                        "m_intLessThan": false,
+                        "m_intNotEqual": false,
+                        "m_intValue": 0,
+                        "m_otherValueToCompare": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "user_instruction",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "m_stringComparisonType": 0,
+                        "m_stringEqual": true,
+                        "m_stringValue": "",
+                        "m_variable": {
+                            "dictionary": {
+                                "entries": [],
+                                "isArray": false,
+                                "variableType": 4,
+                                "type": "Dictionary"
+                            },
+                            "isActionBlockWorkingVar": false,
+                            "isLocalVar": true,
+                            "isSecure": false,
+                            "m_booleanValue": false,
+                            "m_decimalValue": 0.0,
+                            "m_intValue": 0,
+                            "m_name": "user_instruction",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": false,
+                            "supportsOutput": false
+                        },
+                        "disableLogging": false,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": [],
+                        "m_isDisabled": false,
+                        "m_isOrCondition": false
+                    }
+                ],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "disableLogging": false,
+                "m_classType": "BreakFromLoopAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "disableLogging": false,
+                "m_classType": "EndIfAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "disableLogging": false,
+                "m_classType": "EndIfAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "disableLogging": false,
+                "m_classType": "EndLoopAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "disableLogging": false,
+                "m_classType": "EndIfAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            }
+        ],
+        "m_completed": true,
+        "m_constraintList": [],
+        "m_description": "",
+        "m_descriptionOpen": false,
+        "m_enabled": true,
+        "m_excludeLog": false,
+        "m_headingColor": 0,
+        "m_isOrCondition": false,
+        "m_name": "UI Agent",
+        "m_triggerList": []
+    },
+    "macroExportVersion": 1
+}

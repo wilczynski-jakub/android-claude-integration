@@ -1,0 +1,90 @@
+{
+    "globalVariables": [
+        {
+            "description": "",
+            "isActionBlockWorkingVar": true,
+            "m_name": "SYSMAINT_RESTRICT_VALUE",
+            "m_stringValue": "",
+            "supportsOutput": true
+        }
+    ],
+    "macro": {
+        "breakpoints": [],
+        "exportedActionBlocks": [],
+        "exportedSharedScenes": [],
+        "localVariables": [
+            {
+                "isLocalVar": true,
+                "m_name": "code_content",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsOutput": true
+            }
+        ],
+        "localVarsAlphabetical": true,
+        "m_GUID": 0,
+        "m_actionList": [
+            {
+                "filename": "invoke-lock.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "variableName": "code_content",
+                "m_SIGUID": 0,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "disableLogging": false,
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "m_SIGUID": 0,
+                "m_classType": "JavaAction",
+                "m_constraintList": []
+            }
+        ],
+        "m_completed": true,
+        "m_constraintList": [
+            {
+                "checkCase": true,
+                "dictionaryKeys": {
+                    "keys": []
+                },
+                "m_booleanValue": true,
+                "m_stringEqual": true,
+                "m_stringValue": "com.google.android.youtube",
+                "m_variable": {
+                    "m_name": "SYSMAINT_RESTRICT_VALUE",
+                    "m_stringValue": "",
+                    "supportsInput": true,
+                    "supportsOutput": true
+                },
+                "m_SIGUID": 0,
+                "m_classType": "MacroDroidVariableConstraint",
+                "m_constraintList": []
+            }
+        ],
+        "m_description": "",
+        "m_enabled": true,
+        "m_name": "YouTube Lock Perform",
+        "m_triggerList": [
+            {
+                "m_applicationNameList": [
+                    "YouTube"
+                ],
+                "m_launched": true,
+                "m_packageNameList": [
+                    "com.google.android.youtube"
+                ],
+                "m_SIGUID": 0,
+                "m_classType": "ApplicationLaunchedTrigger",
+                "m_constraintList": []
+            }
+        ]
+    },
+    "macroExportVersion": 1
+}

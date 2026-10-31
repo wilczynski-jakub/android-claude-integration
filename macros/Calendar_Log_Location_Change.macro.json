@@ -1,0 +1,136 @@
+{
+    "globalVariables": [
+        {
+            "description": "",
+            "dictionary": {
+                "entries": [
+                    {
+                        "key": "hours",
+                        "variable": {
+                            "intValue": 0,
+                            "type": "IntegerValue"
+                        },
+                        "variableType": 11,
+                        "type": "DictionaryEntry"
+                    },
+                    {
+                        "key": "minutes",
+                        "variable": {
+                            "intValue": 3,
+                            "type": "IntegerValue"
+                        },
+                        "variableType": 11,
+                        "type": "DictionaryEntry"
+                    },
+                    {
+                        "key": "seconds",
+                        "variable": {
+                            "intValue": 30,
+                            "type": "IntegerValue"
+                        },
+                        "variableType": 11,
+                        "type": "DictionaryEntry"
+                    }
+                ],
+                "isArray": false,
+                "parents": [],
+                "variableType": 4,
+                "parentKeys": [],
+                "type": "Dictionary"
+            },
+            "isActionBlockWorkingVar": true,
+            "isLocalVar": false,
+            "isSecure": false,
+            "m_booleanValue": false,
+            "m_decimalValue": 0.0,
+            "m_intValue": 0,
+            "m_name": "LOC_CHECK_INTERVAL",
+            "m_stringValue": "",
+            "m_type": 4,
+            "supportsInput": false,
+            "supportsOutput": true
+        }
+    ],
+    "macro": {
+        "isActionBlock": false,
+        "isExtra": false,
+        "isFavourite": false,
+        "localVariables": [
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "code_content",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": true
+            }
+        ],
+        "localVarsAlphabetical": true,
+        "loggingLevel": 0,
+        "m_actionList": [
+            {
+                "filename": "check-location.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            }
+        ],
+        "m_completed": true,
+        "m_constraintList": [],
+        "m_description": "",
+        "m_descriptionOpen": false,
+        "m_enabled": true,
+        "m_excludeLog": false,
+        "m_headingColor": 0,
+        "m_isOrCondition": false,
+        "m_name": "Calendar Log Location Change",
+        "m_triggerList": [
+            {
+                "m_ignoreReferenceStartTime": true,
+                "m_intervalVariableName": "LOC_CHECK_INTERVAL",
+                "m_minutes": 0,
+                "m_seconds": 0,
+                "m_startHour": 0,
+                "m_startMinute": 0,
+                "m_useAlarm": true,
+                "m_useIntervalVariable": true,
+                "m_useReferenceTimeVariable": false,
+                "disableLogging": false,
+                "m_classType": "RegularIntervalTrigger",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            }
+        ]
+    },
+    "macroExportVersion": 1
+}

@@ -1,0 +1,219 @@
+{
+    "globalVariables": [
+        {
+            "description": "",
+            "isActionBlockWorkingVar": true,
+            "m_name": "SYSMAINT_RESTRICT_VALUE",
+            "m_stringValue": "",
+            "supportsOutput": true
+        }
+    ],
+    "macro": {
+        "breakpoints": [],
+        "exportedActionBlocks": [],
+        "exportedSharedScenes": [],
+        "localVariables": [
+            {
+                "isLocalVar": true,
+                "m_name": "code_content",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsOutput": true
+            },
+            {
+                "isLocalVar": true,
+                "m_name": "contents_str",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsOutput": true
+            },
+            {
+                "isLocalVar": true,
+                "m_name": "found_on_screen",
+                "m_stringValue": "",
+                "supportsOutput": true
+            },
+            {
+                "description": "",
+                "isActionBlockWorkingVar": true,
+                "isLocalVar": true,
+                "m_name": "regex_to_search",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsOutput": true
+            }
+        ],
+        "localVarsAlphabetical": true,
+        "m_GUID": 0,
+        "m_actionList": [
+            {
+                "booleanDictionaryKeys": {
+                    "keys": []
+                },
+                "dictionaryKeys": [],
+                "dictionaryOrArrayType": -1,
+                "m_darkMode": -1,
+                "m_falseLabel": "False",
+                "m_newStringValue": "MacroDroid",
+                "m_trueLabel": "True",
+                "m_userPromptShowCancel": true,
+                "m_userPromptStopAfterCancel": true,
+                "m_variable": {
+                    "description": "",
+                    "isActionBlockWorkingVar": true,
+                    "isLocalVar": true,
+                    "m_name": "regex_to_search",
+                    "m_stringValue": "",
+                    "m_type": 2,
+                    "supportsOutput": true
+                },
+                "m_SIGUID": 0,
+                "m_classType": "SetVariableAction",
+                "m_constraintList": []
+            },
+            {
+                "color": -1,
+                "separatorLabel": "",
+                "m_SIGUID": 0,
+                "m_classType": "SeparatorAction",
+                "m_constraintList": []
+            },
+            {
+                "filename": "get-current-screen-content.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "variableName": "code_content",
+                "m_SIGUID": 0,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "disableLogging": false,
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "responseVariableName": "contents_str",
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "m_SIGUID": 0,
+                "m_classType": "JavaAction",
+                "m_constraintList": []
+            },
+            {
+                "filename": "search-in-screen-content.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "variableName": "code_content",
+                "m_SIGUID": 0,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "disableLogging": false,
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "responseVariableName": "found_on_screen",
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "m_SIGUID": 0,
+                "m_classType": "JavaAction",
+                "m_constraintList": []
+            },
+            {
+                "color": -1,
+                "separatorLabel": "",
+                "m_SIGUID": 0,
+                "m_classType": "SeparatorAction",
+                "m_constraintList": []
+            },
+            {
+                "filename": "invoke-lock.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "variableName": "code_content",
+                "m_SIGUID": 0,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "disableLogging": false,
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "m_SIGUID": 0,
+                "m_classType": "JavaAction",
+                "m_constraintList": [
+                    {
+                        "checkCase": false,
+                        "dictionaryKeys": {
+                            "keys": []
+                        },
+                        "m_booleanValue": true,
+                        "m_otherValueToCompare": {
+                            "isLocalVar": true,
+                            "m_name": "code_content",
+                            "m_stringValue": "",
+                            "m_type": 2,
+                            "supportsInput": true,
+                            "supportsOutput": true
+                        },
+                        "m_stringEqual": true,
+                        "m_variable": {
+                            "isLocalVar": true,
+                            "m_name": "found_on_screen",
+                            "m_stringValue": "",
+                            "supportsInput": true,
+                            "supportsOutput": true
+                        },
+                        "m_SIGUID": 0,
+                        "m_classType": "MacroDroidVariableConstraint",
+                        "m_constraintList": []
+                    }
+                ]
+            }
+        ],
+        "m_completed": true,
+        "m_constraintList": [
+            {
+                "checkCase": true,
+                "dictionaryKeys": {
+                    "keys": []
+                },
+                "m_booleanValue": true,
+                "m_stringEqual": true,
+                "m_stringValue": "com.google.android.youtube",
+                "m_variable": {
+                    "m_name": "SYSMAINT_RESTRICT_VALUE",
+                    "m_stringValue": "",
+                    "supportsInput": true,
+                    "supportsOutput": true
+                },
+                "m_SIGUID": 0,
+                "m_classType": "MacroDroidVariableConstraint",
+                "m_constraintList": []
+            }
+        ],
+        "m_description": "",
+        "m_enabled": true,
+        "m_name": "YouTube Lock Sentinel",
+        "m_triggerList": [
+            {
+                "activityNameToMatch": "com.android.settings.SubSettings",
+                "launched": true,
+                "m_SIGUID": 0,
+                "m_classType": "AppActivityLaunchedTrigger",
+                "m_constraintList": []
+            }
+        ]
+    },
+    "macroExportVersion": 1
+}

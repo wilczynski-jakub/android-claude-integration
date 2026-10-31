@@ -1,0 +1,21 @@
+# ask only in an interactive terminal
+if [ -t 0 ]; then
+	printf '\n\033[1;36mRun \033[1;33mUbuntu\033[1;36m (\033[1;32my\033[1;36m) now?\033[0m\n'
+	read _answer
+
+	case "$_answer" in
+		y)
+			unset _answer
+
+			# mount MacroDroid's shared folder as the repo inside Ubuntu
+			proot-distro login ubuntu --user ubuntu \
+				--bind ~/storage/shared/MacroDroid:/home/ubuntu/claude-code-macrodroid \
+				-w /home/ubuntu/claude-code-macrodroid
+			;;
+
+		*)
+			echo "Unknown option: $_answer" >&2
+			unset _answer
+			;;
+	esac
+fi

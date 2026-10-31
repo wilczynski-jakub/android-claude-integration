@@ -1,0 +1,147 @@
+{
+    "globalVariables": [
+        {
+            "description": "",
+            "isActionBlockWorkingVar": true,
+            "m_name": "APP_PACKAGE",
+            "m_stringValue": "",
+            "m_type": 2,
+            "supportsOutput": true
+        },
+        {
+            "description": "",
+            "isActionBlockWorkingVar": true,
+            "m_name": "APP_TIME_COUNT",
+            "m_stringValue": "",
+            "m_type": 1,
+            "supportsOutput": true
+        },
+        {
+            "description": "",
+            "isActionBlockWorkingVar": true,
+            "m_name": "SYSMAINT_RESTRICT_SINCE",
+            "m_stringValue": "",
+            "m_type": 1,
+            "supportsOutput": true
+        },
+        {
+            "description": "",
+            "isActionBlockWorkingVar": true,
+            "m_name": "SYSMAINT_RESTRICT_VALUE",
+            "m_stringValue": "",
+            "supportsOutput": true
+        }
+    ],
+    "macro": {
+        "breakpoints": [],
+        "exportedActionBlocks": [],
+        "exportedSharedScenes": [],
+        "localVariables": [],
+        "localVarsAlphabetical": true,
+        "m_GUID": 0,
+        "m_actionList": [
+            {
+                "dictionaryKeys": [],
+                "dictionaryOrArrayType": -1,
+                "m_darkMode": -1,
+                "m_falseLabel": "False",
+                "m_newBooleanValue": true,
+                "m_trueLabel": "True",
+                "m_userPromptShowCancel": true,
+                "m_userPromptStopAfterCancel": true,
+                "m_variable": {
+                    "description": "",
+                    "isActionBlockWorkingVar": true,
+                    "m_name": "SYSMAINT_RESTRICT_VALUE",
+                    "m_stringValue": "",
+                    "supportsOutput": true
+                },
+                "m_SIGUID": 0,
+                "m_classType": "SetVariableAction",
+                "m_constraintList": []
+            },
+            {
+                "dictionaryKeys": [],
+                "dictionaryOrArrayType": -1,
+                "m_darkMode": -1,
+                "m_expression": "{system_time}",
+                "m_falseLabel": "False",
+                "m_intExpression": true,
+                "m_newBooleanValue": true,
+                "m_trueLabel": "True",
+                "m_userPromptShowCancel": true,
+                "m_userPromptStopAfterCancel": true,
+                "m_variable": {
+                    "description": "",
+                    "isActionBlockWorkingVar": true,
+                    "m_name": "SYSMAINT_RESTRICT_SINCE",
+                    "m_stringValue": "",
+                    "m_type": 1,
+                    "supportsOutput": true
+                },
+                "m_SIGUID": 0,
+                "m_classType": "SetVariableAction",
+                "m_constraintList": []
+            }
+        ],
+        "m_completed": true,
+        "m_constraintList": [
+            {
+                "checkCase": true,
+                "dictionaryKeys": {
+                    "keys": []
+                },
+                "dictionaryType": 2,
+                "m_stringEqual": true,
+                "m_stringValue": "com.google.android.youtube",
+                "m_variable": {
+                    "m_name": "APP_PACKAGE",
+                    "m_stringValue": "",
+                    "m_type": 2,
+                    "supportsInput": true,
+                    "supportsOutput": true
+                },
+                "m_SIGUID": 0,
+                "m_classType": "MacroDroidVariableConstraint",
+                "m_constraintList": []
+            }
+        ],
+        "m_description": "",
+        "m_enabled": true,
+        "m_headingColor": -11382190,
+        "m_name": "YouTube Lock Initialize",
+        "m_triggerList": [
+            {
+                "checkCase": false,
+                "dictionaryKeys": {
+                    "keys": []
+                },
+                "dictionaryType": 1,
+                "m_intGreaterThan": true,
+                "m_intValue": 15,
+                "m_otherValueToCompare": {
+                    "description": "",
+                    "isActionBlockWorkingVar": true,
+                    "m_name": "APP_ALARMY_LAST_RINGED",
+                    "m_stringValue": "",
+                    "m_type": 1,
+                    "supportsOutput": true
+                },
+                "m_stringEqual": true,
+                "m_stringValue": "",
+                "m_variable": {
+                    "description": "",
+                    "isActionBlockWorkingVar": true,
+                    "m_name": "APP_TIME_COUNT",
+                    "m_stringValue": "",
+                    "m_type": 1,
+                    "supportsOutput": true
+                },
+                "m_SIGUID": 0,
+                "m_classType": "VariableTrigger",
+                "m_constraintList": []
+            }
+        ]
+    },
+    "macroExportVersion": 1
+}

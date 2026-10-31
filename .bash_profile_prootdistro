@@ -1,0 +1,22 @@
+# ask only in an interactive terminal, and not inside Claude Code's own shell
+if [ -t 0 ] && [ -z "$CLAUDECODE" ]; then
+	printf '\n\033[1;36mRun \033[1;33m`claude`\033[1;36m (\033[1;32my\033[1;36m) or \033[1;33m`claude -r`\033[1;36m (\033[1;32mr\033[1;36m) now?\033[0m\n'
+	read _answer
+
+	case "$_answer" in
+		y)
+			unset _answer
+			claude
+			;;
+
+		r)
+			unset _answer
+			claude -r
+			;;
+			
+		*)
+			echo "Unknown option: $_answer" >&2
+			unset _answer
+			;;
+	esac
+fi
