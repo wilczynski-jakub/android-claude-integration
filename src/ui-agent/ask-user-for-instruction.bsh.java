@@ -27,17 +27,17 @@ int getOverlayWindowType() {
 	return WindowManager.LayoutParams.TYPE_PHONE;
 }
 
-void showInstructionDialog(Context context, String message, String[] resultHolder, AlertDialog[] dialogHolder, CountDownLatch dialogClosed) {
-	final EditText field = new EditText(context);
-	field.setHint(DIALOG_FIELD_HINT);
+void showInstructionDialog(Context context, String message, String[] instructionHolder, AlertDialog[] dialogHolder, CountDownLatch dialogClosed) {
+	final EditText instructionField = new EditText(context);
+	instructionField.setHint(DIALOG_FIELD_HINT);
 
 	AlertDialog dialog = new AlertDialog.Builder(context)
 		.setTitle(DIALOG_TITLE)
 		.setMessage(message)
-		.setView(field)
+		.setView(instructionField)
 		.setPositiveButton("Send to Claude", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface clickedDialog, int which) {
-				resultHolder[0] = field.getText().toString();
+				instructionHolder[0] = instructionField.getText().toString();
 			}
 		})
 		.setNegativeButton("Give up", null)
@@ -58,14 +58,14 @@ void showInstructionDialog(Context context, String message, String[] resultHolde
 // Returns "" when the dialog was cancelled or timed out.
 String askForInstruction(String message, int timeoutSeconds) {
 	final Context context = new ContextThemeWrapper(appContext, android.R.style.Theme_DeviceDefault_Dialog_Alert);
-	final String[] resultHolder = new String[1];
+	final String[] instructionHolder = new String[1];
 	final AlertDialog[] dialogHolder = new AlertDialog[1];
 	final CountDownLatch dialogClosed = new CountDownLatch(1);
 	Handler mainHandler = new Handler(Looper.getMainLooper());
 
 	mainHandler.post(new Runnable() {
 		public void run() {
-			showInstructionDialog(context, message, resultHolder, dialogHolder, dialogClosed);
+			showInstructionDialog(context, message, instructionHolder, dialogHolder, dialogClosed);
 		}
 	});
 
@@ -80,7 +80,7 @@ String askForInstruction(String message, int timeoutSeconds) {
 		dialogClosed.await(5, TimeUnit.SECONDS);
 	}
 
-	return resultHolder[0] != null ? resultHolder[0] : "";
+	return instructionHolder[0] != null ? instructionHolder[0] : "";
 }
 
 // Clear the output first, so a run that fails midway never leaves the previous run's instruction behind.

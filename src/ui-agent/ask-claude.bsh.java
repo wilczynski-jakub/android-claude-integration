@@ -84,8 +84,8 @@ String readStream(InputStream stream) {
 	return text.toString();
 }
 
-String readResponseBody(HttpURLConnection connection, int returnCode) {
-	if (returnCode >= 400) {
+String readResponseBody(HttpURLConnection connection, int httpStatusCode) {
+	if (httpStatusCode >= 400) {
 		return readStream(connection.getErrorStream());
 	}
 
@@ -107,15 +107,15 @@ String extractText(JSONObject response) {
 	return text.toString().trim();
 }
 
-boolean isRetryable(int returnCode) {
-	return returnCode == 429 || returnCode >= 500;
+boolean isRetryable(int httpStatusCode) {
+	return httpStatusCode == 429 || httpStatusCode >= 500;
 }
 
-void writeOutputs(String requestBody, boolean success, int returnCode, String responseOutput, String responseText, int inputTokens, int outputTokens) {
+void writeOutputs(String requestBody, boolean success, int httpStatusCode, String responseBody, String responseText, int inputTokens, int outputTokens) {
 	variableSetter.setString("request_body", requestBody);
-	variableSetter.setBoolean("success", success);
-	variableSetter.setInt("response_return_code", returnCode);
-	variableSetter.setString("response_output", responseOutput);
+	variableSetter.setBoolean("step_success", success);
+	variableSetter.setInt("response_return_code", httpStatusCode);
+	variableSetter.setString("response_output", responseBody);
 	variableSetter.setString("response_text", responseText);
 	variableSetter.setInt("input_tokens", inputTokens);
 	variableSetter.setInt("output_tokens", outputTokens);
@@ -134,8 +134,8 @@ System.out.println("requestBody.length() = `" + requestBody.length() + "`");
 System.out.println();
 
 boolean success = false;
-int returnCode = 0;
-String responseOutput = "";
+int httpStatusCode = 0;
+String responseBody = "";
 String responseText = "";
 int inputTokens = 0;
 int outputTokens = 0;
@@ -145,17 +145,17 @@ try {
 
 	for (int attempt = 1; attempt <= MAX_ATTEMPTS && !success; attempt++) {
 		HttpURLConnection connection = sendRequest(apiKey, requestBody);
-		returnCode = connection.getResponseCode();
-		responseOutput = readResponseBody(connection, returnCode);
+		httpStatusCode = connection.getResponseCode();
+		responseBody = readResponseBody(connection, httpStatusCode);
 		connection.disconnect();
 
 		System.out.println("attempt = `" + attempt + "`");
-		System.out.println("returnCode = `" + returnCode + "`");
-		System.out.println("responseOutput = `" + responseOutput + "`");
+		System.out.println("httpStatusCode = `" + httpStatusCode + "`");
+		System.out.println("responseBody = `" + responseBody + "`");
 		System.out.println();
 
-		if (returnCode == 200) {
-			JSONObject response = new JSONObject(responseOutput);
+		if (httpStatusCode == 200) {
+			JSONObject response = new JSONObject(responseBody);
 			responseText = extractText(response);
 			inputTokens = response.getJSONObject("usage").getInt("input_tokens");
 			outputTokens = response.getJSONObject("usage").getInt("output_tokens");
@@ -172,7 +172,7 @@ try {
 			}
 
 			success = responseText.length() > 0;
-		} else if (!isRetryable(returnCode)) {
+		} else if (!isRetryable(httpStatusCode)) {
 			break;
 		}
 
@@ -181,8 +181,8 @@ try {
 		}
 	}
 } catch (Exception exception) {
-	responseOutput = exception.toString();
-	System.out.println("exception = `" + responseOutput + "`");
+	responseBody = exception.toString();
+	System.out.println("exception = `" + responseBody + "`");
 	System.out.println();
 }
 
@@ -191,5 +191,5 @@ System.out.println("responseText = `" + responseText + "`");
 System.out.println("inputTokens = `" + inputTokens + "`");
 System.out.println("outputTokens = `" + outputTokens + "`");
 
-writeOutputs(requestBody, success, returnCode, responseOutput, responseText, inputTokens, outputTokens);
+writeOutputs(requestBody, success, httpStatusCode, responseBody, responseText, inputTokens, outputTokens);
 

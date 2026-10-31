@@ -11,7 +11,7 @@
         {
             "description": "",
             "isActionBlockWorkingVar": true,
-            "m_name": "APP_TIME_COUNT",
+            "m_name": "APP_USAGE_MINS",
             "m_stringValue": "",
             "m_type": 1,
             "supportsOutput": true
@@ -132,7 +132,7 @@
                 "m_variable": {
                     "description": "",
                     "isActionBlockWorkingVar": true,
-                    "m_name": "APP_TIME_COUNT",
+                    "m_name": "APP_USAGE_MINS",
                     "m_stringValue": "",
                     "m_type": 1,
                     "supportsOutput": true

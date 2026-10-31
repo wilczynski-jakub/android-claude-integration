@@ -9,7 +9,7 @@ import java.util.Iterator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-String resultJSON = "";
+String matchResultJSON = "";
 
 String RULES_FILE_NAME = "rules.json";
 String RULES_BACKUP_FILE_NAME = "rules.backup.json";
@@ -125,20 +125,20 @@ boolean hasNoViewId(String screenKey) {
 // tells apart several elements sharing one viewId, so the click needs it to hit the right one.
 // An element without a view id is recognisable by its text alone, so it can satisfy a condition that names
 // no view id; it is never returned as something to click, because there is no view id to click.
-String findScreenKey(JSONObject screen, JSONObject condition, boolean mustHaveViewId) {
-	String textPart = condition.optString("textContains").toLowerCase();
-	String viewIdPart = condition.optString("viewIdContains").toLowerCase();
-	Iterator keys = screen.keys();
+String findScreenKey(JSONObject screenContents, JSONObject condition, boolean mustHaveViewId) {
+	String textContains = condition.optString("textContains").toLowerCase();
+	String viewIdContains = condition.optString("viewIdContains").toLowerCase();
+	Iterator keys = screenContents.keys();
 	while (keys.hasNext()) {
 		String screenKey = (String) keys.next();
 		boolean isWithoutViewId = hasNoViewId(screenKey);
-		if (isWithoutViewId && (mustHaveViewId || viewIdPart.length() > 0)) {
+		if (isWithoutViewId && (mustHaveViewId || viewIdContains.length() > 0)) {
 			continue;
 		}
 
-		String text = screen.optString(screenKey).toLowerCase();
-		boolean isViewIdMatch = isWithoutViewId || screenKey.toLowerCase().contains(viewIdPart);
-		if (text.contains(textPart) && isViewIdMatch) {
+		String text = screenContents.optString(screenKey).toLowerCase();
+		boolean isViewIdMatch = isWithoutViewId || screenKey.toLowerCase().contains(viewIdContains);
+		if (text.contains(textContains) && isViewIdMatch) {
 			return screenKey;
 		}
 	}
@@ -146,13 +146,13 @@ String findScreenKey(JSONObject screen, JSONObject condition, boolean mustHaveVi
 	return null;
 }
 
-boolean allConditionsMatch(JSONObject screen, JSONArray conditions) {
+boolean allConditionsMatch(JSONObject screenContents, JSONArray conditions) {
 	if (conditions == null) {
 		return true;
 	}
 
 	for (int i = 0; i < conditions.length(); i++) {
-		if (findScreenKey(screen, conditions.getJSONObject(i), false) == null) {
+		if (findScreenKey(screenContents, conditions.getJSONObject(i), false) == null) {
 			return false;
 		}
 	}
@@ -160,22 +160,22 @@ boolean allConditionsMatch(JSONObject screen, JSONArray conditions) {
 	return true;
 }
 
-boolean isGoalDone(JSONObject screen, JSONArray doneWhen) {
+boolean isGoalDone(JSONObject screenContents, JSONArray doneWhen) {
 	if (doneWhen == null || doneWhen.length() == 0) {
 		return false;
 	}
 
-	return allConditionsMatch(screen, doneWhen);
+	return allConditionsMatch(screenContents, doneWhen);
 }
 
 boolean isRuleActive(JSONObject rule) {
 	return !rule.optString("status").equals("disabled") && rule.optInt("failures") < MAX_FAILURES;
 }
 
-JSONObject resolveAction(JSONObject ruleAction, JSONObject screen) {
+JSONObject resolveAction(JSONObject ruleAction, JSONObject screenContents) {
 	JSONObject action = new JSONObject(ruleAction.toString());
 	if (action.optString("type").equals("CLICK")) {
-		String viewId = findScreenKey(screen, action, true);
+		String viewId = findScreenKey(screenContents, action, true);
 		if (viewId == null) {
 			return null;
 		}
@@ -186,17 +186,17 @@ JSONObject resolveAction(JSONObject ruleAction, JSONObject screen) {
 	return action;
 }
 
-JSONObject findMatchingRule(JSONArray rules, JSONObject screen) {
+JSONObject findMatchingRule(JSONArray rules, JSONObject screenContents) {
 	if (rules == null) {
 		return null;
 	}
 
 	for (int i = 0; i < rules.length(); i++) {
 		JSONObject rule = rules.getJSONObject(i);
-		boolean matches = isRuleActive(rule)
-			&& allConditionsMatch(screen, rule.optJSONArray("when"))
-			&& resolveAction(rule.getJSONObject("action"), screen) != null;
-		if (matches) {
+		boolean ruleMatches = isRuleActive(rule)
+			&& allConditionsMatch(screenContents, rule.optJSONArray("when"))
+			&& resolveAction(rule.getJSONObject("action"), screenContents) != null;
+		if (ruleMatches) {
 			return rule;
 		}
 	}
@@ -204,13 +204,13 @@ JSONObject findMatchingRule(JSONArray rules, JSONObject screen) {
 	return null;
 }
 
-String buildFilteredScreen(JSONObject screen) {
+String buildFilteredScreen(JSONObject screenContents) {
 	HashSet seenLines = new HashSet();
 	StringBuilder filteredScreen = new StringBuilder();
-	Iterator keys = screen.keys();
+	Iterator keys = screenContents.keys();
 	while (keys.hasNext()) {
 		String viewId = (String) keys.next();
-		String text = screen.optString(viewId).replaceAll("\\s+", " ").trim();
+		String text = screenContents.optString(viewId).replaceAll("\\s+", " ").trim();
 		if (text.length() < 2) {
 			continue;
 		}
@@ -248,7 +248,7 @@ String filteredScreen = "";
 String matchError = "";
 
 try {
-	JSONObject screen = new JSONObject(magicText.evaluateString("{" + "lv=contents_json" + "}"));
+	JSONObject screenContents = new JSONObject(magicText.evaluateString("{" + "lv=contents_json" + "}"));
 	File rulesFile = new File(appContext.getFilesDir(), RULES_FILE_NAME);
 	JSONObject rules = loadRules(rulesFile);
 	JSONObject goalRules = getOrCreateGoal(rules, goalName, rulesFile);
@@ -257,23 +257,23 @@ try {
 		System.out.println("currentStep (from firstStep) = `" + currentStep + "`");
 	}
 
-	filteredScreen = buildFilteredScreen(screen);
+	filteredScreen = buildFilteredScreen(screenContents);
 	nextStep = currentStep;
-	goalDone = isGoalDone(screen, goalRules.optJSONArray("doneWhen"));
+	goalDone = isGoalDone(screenContents, goalRules.optJSONArray("doneWhen"));
 	if (!goalDone) {
-		JSONObject rule = findMatchingRule(rules.optJSONArray("globalRules"), screen);
-		boolean isGlobal = rule != null;
-		if (!isGlobal) {
+		JSONObject rule = findMatchingRule(rules.optJSONArray("globalRules"), screenContents);
+		boolean isGlobalRule = rule != null;
+		if (!isGlobalRule) {
 			JSONArray stepRules = goalRules.getJSONObject("steps").optJSONArray(currentStep);
-			rule = findMatchingRule(stepRules, screen);
+			rule = findMatchingRule(stepRules, screenContents);
 		}
 
 		if (rule != null) {
-			System.out.println("isGlobal = `" + isGlobal + "`");
+			System.out.println("isGlobalRule = `" + isGlobalRule + "`");
 			matchFound = true;
 			ruleId = rule.optString("id");
-			action = resolveAction(rule.getJSONObject("action"), screen);
-			if (!isGlobal) {
+			action = resolveAction(rule.getJSONObject("action"), screenContents);
+			if (!isGlobalRule) {
 				// Older rules may still name their next step "done"; a step name no longer finishes the goal, so stay put.
 				String ruleNextStep = rule.optString("nextStep", currentStep);
 				nextStep = ruleNextStep.equals(DONE_STEP) ? currentStep : ruleNextStep;
@@ -294,16 +294,16 @@ System.out.println("action = `" + action + "`");
 System.out.println("matchError = `" + matchError + "`");
 System.out.println("filteredScreen = `" + filteredScreen + "`");
 
-JSONObject result = new JSONObject();
-result.put("done", goalDone);
-result.put("match_found", matchFound);
-result.put("finishes_goal", finishesGoal);
-result.put("rule_id", ruleId);
-result.put("current_step", currentStep);
-result.put("next_step", nextStep);
-result.put("filtered_screen", filteredScreen);
-result.put("match_error", matchError);
-result.put("action", action);
-resultJSON = result.toString();
+JSONObject matchResult = new JSONObject();
+matchResult.put("done", goalDone);
+matchResult.put("match_found", matchFound);
+matchResult.put("finishes_goal", finishesGoal);
+matchResult.put("rule_id", ruleId);
+matchResult.put("current_step", currentStep);
+matchResult.put("next_step", nextStep);
+matchResult.put("filtered_screen", filteredScreen);
+matchResult.put("match_error", matchError);
+matchResult.put("action", action);
+matchResultJSON = matchResult.toString();
 
-resultJSON; // Output Variable
+matchResultJSON; // Output Variable

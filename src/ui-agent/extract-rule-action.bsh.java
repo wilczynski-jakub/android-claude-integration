@@ -23,9 +23,9 @@ void writeActionDict(String actionType, String actionViewId, int actionSeconds) 
 }
 
 // Clear the outputs first, so a run that fails midway never leaves the previous run's values behind.
-// "success" is only cleared here: the block sets it to true itself, after its native action has run.
+// "step_success" is only cleared here: the block sets it to true itself, after its native action has run.
 writeActionDict("", "", 0);
-variableSetter.setBoolean("success", false);
+variableSetter.setBoolean("step_success", false);
 
 String ruleResultJSON = magicText.evaluateString("{" + "lv=rule_result_json" + "}");
 System.out.println("ruleResultJSON (first " + RAW_RULE_LOG_LENGTH + " chars) = `" + firstChars(ruleResultJSON, RAW_RULE_LOG_LENGTH) + "`");

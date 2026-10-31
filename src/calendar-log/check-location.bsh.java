@@ -1,5 +1,5 @@
-// Required global variables: LOC_NOW_LAT, LOC_NOW_LON, LOC_MAP_URL, LOC_TRAVEL_TIME, LOC_MAX_EVENT_TIME, LOC_CHECK_INTERVAL, LOC_CALENDAR_NAME
-// Required local variables: event_duration, event_title, event_description, event_location, event_calendar_name
+// Required global variables: LOC_LAST_LAT, LOC_LAST_LON, LOC_MAP_URL, LOC_TRAVEL_MINS, LOC_MAX_EVENT_MINS, LOC_CHECK_INTERVAL, LOC_CALENDAR_NAME
+// Required local variables: event_duration_mins, event_title, event_description, event_location, event_calendar_name
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -9,7 +9,7 @@ import android.location.LocationManager;
 import android.os.Build;
 
 double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
-	double earthRadiusM = 6371000.0;
+	double earthRadiusMeters = 6371000.0;
 	double deltaLat = Math.toRadians(lat2 - lat1);
 	double deltaLon = Math.toRadians(lon2 - lon1);
 
@@ -17,7 +17,7 @@ double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
 			+ Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
 			* Math.sin(deltaLon / 2.0) * Math.sin(deltaLon / 2.0);
 
-	return 2.0 * earthRadiusM * Math.atan2(
+	return 2.0 * earthRadiusMeters * Math.atan2(
 			Math.sqrt(haversine),
 			Math.sqrt(1.0 - haversine)
 	);
@@ -41,30 +41,30 @@ System.out.println("locationKnown = `" + locationKnown + "`");
 System.out.println();
 
 // Load previously stored location state
-double globalLocNowLatBefore = magicText.evaluateDecimal("{" + "v=LOC_NOW_LAT" + "}");
-double globalLocNowLonBefore = magicText.evaluateDecimal("{" + "v=LOC_NOW_LON" + "}");
+double globalLocLastLatBefore = magicText.evaluateDecimal("{" + "v=LOC_LAST_LAT" + "}");
+double globalLocLastLonBefore = magicText.evaluateDecimal("{" + "v=LOC_LAST_LON" + "}");
 String globalLocMapUrlBefore = magicText.evaluateString("{" + "v=LOC_MAP_URL" + "}");
-int globalLocTravelTimeBefore = magicText.evaluateInt("{" + "v=LOC_TRAVEL_TIME" + "}");
-System.out.println("LOC_NOW_LAT (before) = `" + globalLocNowLatBefore + "`");
-System.out.println("LOC_NOW_LON (before) = `" + globalLocNowLonBefore + "`");
+int globalLocTravelMinsBefore = magicText.evaluateInt("{" + "v=LOC_TRAVEL_MINS" + "}");
+System.out.println("LOC_LAST_LAT (before) = `" + globalLocLastLatBefore + "`");
+System.out.println("LOC_LAST_LON (before) = `" + globalLocLastLonBefore + "`");
 System.out.println("LOC_MAP_URL (before) = `" + globalLocMapUrlBefore + "`");
-System.out.println("LOC_TRAVEL_TIME (before) = `" + globalLocTravelTimeBefore + "`");
+System.out.println("LOC_TRAVEL_MINS (before) = `" + globalLocTravelMinsBefore + "`");
 
-int globalLocMaxEventTime = magicText.evaluateInt("{" + "v=LOC_MAX_EVENT_TIME" + "}");
-System.out.println("LOC_MAX_EVENT_TIME = `" + globalLocMaxEventTime + "`");
+int globalLocMaxEventMins = magicText.evaluateInt("{" + "v=LOC_MAX_EVENT_MINS" + "}");
+System.out.println("LOC_MAX_EVENT_MINS = `" + globalLocMaxEventMins + "`");
 System.out.println();
 
 boolean previousLocationSet =
-        globalLocNowLatBefore != 0 &&
-        globalLocNowLonBefore != 0;
+        globalLocLastLatBefore != 0 &&
+        globalLocLastLonBefore != 0;
 
 // Calculate distance between previous and current location
-double distance = previousLocationSet
-        ? calculateDistance(globalLocNowLatBefore, globalLocNowLonBefore, currentLat, currentLon)
+double distanceMeters = previousLocationSet
+        ? calculateDistance(globalLocLastLatBefore, globalLocLastLonBefore, currentLat, currentLon)
         : 0.0;
 
 System.out.println("previousLocationSet = `" + previousLocationSet + "`");
-System.out.println("distanceM = `" + distance + "`");
+System.out.println("distanceMeters = `" + distanceMeters + "`");
 System.out.println();
 
 int eventDurationMins = 0;
@@ -78,21 +78,21 @@ String branchTaken = "";
 if (!locationKnown) {
     branchTaken = "location_unknown";
     System.out.println("branchTaken = `" + branchTaken + "`");
-} else if (previousLocationSet && distance > 100.0 + locationAccuracy && globalLocTravelTimeBefore < globalLocMaxEventTime) {
+} else if (previousLocationSet && distanceMeters > 100.0 + locationAccuracy && globalLocTravelMinsBefore < globalLocMaxEventMins) {
     branchTaken = "location_changed";
 
-    int locCheckIntervalMins = magicText.evaluateInt("{" + "v=LOC_CHECK_INTERVAL[minutes]" + "}");
-    int globalLocTravelTimeAfter = globalLocTravelTimeBefore + locCheckIntervalMins;
-    variableSetter.setInt("LOC_TRAVEL_TIME", globalLocTravelTimeAfter);
+    int globalLocCheckIntervalMins = magicText.evaluateInt("{" + "v=LOC_CHECK_INTERVAL[minutes]" + "}");
+    int globalLocTravelMinsAfter = globalLocTravelMinsBefore + globalLocCheckIntervalMins;
+    variableSetter.setInt("LOC_TRAVEL_MINS", globalLocTravelMinsAfter);
 
     System.out.println("branchTaken = `" + branchTaken + "`");
-    System.out.println("locCheckIntervalMins = `" + locCheckIntervalMins + "`");
-    System.out.println("LOC_TRAVEL_TIME (after) = `" + globalLocTravelTimeAfter + "`");
-} else if (globalLocTravelTimeBefore > 0) {
+    System.out.println("globalLocCheckIntervalMins = `" + globalLocCheckIntervalMins + "`");
+    System.out.println("LOC_TRAVEL_MINS (after) = `" + globalLocTravelMinsAfter + "`");
+} else if (globalLocTravelMinsBefore > 0) {
     // Location stopped changing -> create calendar event
     branchTaken = "location_stopped";
 
-    eventDurationMins = globalLocTravelTimeBefore;
+    eventDurationMins = globalLocTravelMinsBefore;
     eventTitle = "commuting...";
     eventDescription = "TO: " + currentMapUrl;
     eventLocation = globalLocMapUrlBefore;
@@ -100,10 +100,10 @@ if (!locationKnown) {
 
     System.out.println("branchTaken = `" + branchTaken + "`");
 
-    variableSetter.setInt("LOC_TRAVEL_TIME", 0);
+    variableSetter.setInt("LOC_TRAVEL_MINS", 0);
     variableSetter.setString("LOC_MAP_URL", currentMapUrl);
 
-    System.out.println("LOC_TRAVEL_TIME (after) = `" + magicText.evaluateInt("{" + "v=LOC_TRAVEL_TIME" + "}") + "`");
+    System.out.println("LOC_TRAVEL_MINS (after) = `" + magicText.evaluateInt("{" + "v=LOC_TRAVEL_MINS" + "}") + "`");
     System.out.println("LOC_MAP_URL (after) = `" + currentMapUrl + "`");
 } else {
     // First detected location change
@@ -114,15 +114,15 @@ if (!locationKnown) {
     System.out.println("LOC_MAP_URL (after) = `" + currentMapUrl + "`");
 }
 
-// insert-calendar-event.bsh reads these. event_duration = 0 means there is no event to insert
-variableSetter.setInt("event_duration", eventDurationMins);
+// insert-calendar-event.bsh reads these. event_duration_mins = 0 means there is no event to insert
+variableSetter.setInt("event_duration_mins", eventDurationMins);
 variableSetter.setString("event_title", eventTitle);
 variableSetter.setString("event_description", eventDescription);
 variableSetter.setString("event_location", eventLocation);
 variableSetter.setString("event_calendar_name", eventCalendarName);
 
 System.out.println();
-System.out.println("event_duration = `" + eventDurationMins + "`");
+System.out.println("event_duration_mins = `" + eventDurationMins + "`");
 System.out.println("event_title = `" + eventTitle + "`");
 System.out.println("event_description = `" + eventDescription + "`");
 System.out.println("event_location = `" + eventLocation + "`");
@@ -130,11 +130,11 @@ System.out.println("event_calendar_name = `" + eventCalendarName + "`");
 
 // Store current location
 if (locationKnown) {
-    variableSetter.setDecimal("LOC_NOW_LAT", currentLat);
-    variableSetter.setDecimal("LOC_NOW_LON", currentLon);
+    variableSetter.setDecimal("LOC_LAST_LAT", currentLat);
+    variableSetter.setDecimal("LOC_LAST_LON", currentLon);
 
     System.out.println();
-    System.out.println("LOC_NOW_LAT (after) = `" + magicText.evaluateDecimal("{" + "v=LOC_NOW_LAT" + "}") + "`");
-    System.out.println("LOC_NOW_LON (after) = `" + magicText.evaluateDecimal("{" + "v=LOC_NOW_LON" + "}") + "`");
-    System.out.println("LOC_TRAVEL_TIME (after) = `" + magicText.evaluateDecimal("{" + "v=LOC_TRAVEL_TIME" + "}") + "`");
+    System.out.println("LOC_LAST_LAT (after) = `" + magicText.evaluateDecimal("{" + "v=LOC_LAST_LAT" + "}") + "`");
+    System.out.println("LOC_LAST_LON (after) = `" + magicText.evaluateDecimal("{" + "v=LOC_LAST_LON" + "}") + "`");
+    System.out.println("LOC_TRAVEL_MINS (after) = `" + magicText.evaluateDecimal("{" + "v=LOC_TRAVEL_MINS" + "}") + "`");
 }

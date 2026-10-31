@@ -8,7 +8,7 @@ import java.util.Iterator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-String resultJSON = "";
+String saveResultJSON = "";
 
 String RULES_FILE_NAME = "rules.json";
 String DEFAULT_FIRST_STEP = "start";
@@ -70,20 +70,20 @@ boolean hasNoViewId(String screenKey) {
 // tells apart several elements sharing one viewId, so the click needs it to hit the right one.
 // An element without a view id is recognisable by its text alone, so it can satisfy a condition that names
 // no view id; it is never returned as something to click, because there is no view id to click.
-String findScreenKey(JSONObject screen, JSONObject condition, boolean mustHaveViewId) {
-	String textPart = condition.optString("textContains").toLowerCase();
-	String viewIdPart = condition.optString("viewIdContains").toLowerCase();
-	Iterator keys = screen.keys();
+String findScreenKey(JSONObject screenContents, JSONObject condition, boolean mustHaveViewId) {
+	String textContains = condition.optString("textContains").toLowerCase();
+	String viewIdContains = condition.optString("viewIdContains").toLowerCase();
+	Iterator keys = screenContents.keys();
 	while (keys.hasNext()) {
 		String screenKey = (String) keys.next();
 		boolean isWithoutViewId = hasNoViewId(screenKey);
-		if (isWithoutViewId && (mustHaveViewId || viewIdPart.length() > 0)) {
+		if (isWithoutViewId && (mustHaveViewId || viewIdContains.length() > 0)) {
 			continue;
 		}
 
-		String text = screen.optString(screenKey).toLowerCase();
-		boolean isViewIdMatch = isWithoutViewId || screenKey.toLowerCase().contains(viewIdPart);
-		if (text.contains(textPart) && isViewIdMatch) {
+		String text = screenContents.optString(screenKey).toLowerCase();
+		boolean isViewIdMatch = isWithoutViewId || screenKey.toLowerCase().contains(viewIdContains);
+		if (text.contains(textContains) && isViewIdMatch) {
 			return screenKey;
 		}
 	}
@@ -91,13 +91,13 @@ String findScreenKey(JSONObject screen, JSONObject condition, boolean mustHaveVi
 	return null;
 }
 
-boolean allConditionsMatch(JSONObject screen, JSONArray conditions) {
+boolean allConditionsMatch(JSONObject screenContents, JSONArray conditions) {
 	if (conditions == null) {
 		return true;
 	}
 
 	for (int i = 0; i < conditions.length(); i++) {
-		if (findScreenKey(screen, conditions.getJSONObject(i), false) == null) {
+		if (findScreenKey(screenContents, conditions.getJSONObject(i), false) == null) {
 			return false;
 		}
 	}
@@ -105,10 +105,10 @@ boolean allConditionsMatch(JSONObject screen, JSONArray conditions) {
 	return true;
 }
 
-JSONObject resolveAction(JSONObject ruleAction, JSONObject screen) {
+JSONObject resolveAction(JSONObject ruleAction, JSONObject screenContents) {
 	JSONObject action = new JSONObject(ruleAction.toString());
 	if (action.optString("type").equals("CLICK")) {
-		String viewId = findScreenKey(screen, action, true);
+		String viewId = findScreenKey(screenContents, action, true);
 		if (viewId == null) {
 			return null;
 		}
@@ -129,7 +129,7 @@ JSONObject parseResponse(String responseText) {
 	return new JSONObject(responseText.substring(jsonStart, jsonEnd + 1));
 }
 
-String validateRule(JSONObject rule, JSONObject screen) {
+String validateRule(JSONObject rule, JSONObject screenContents) {
 	if (rule.optString("id").length() == 0) {
 		return "Rule has no id";
 	}
@@ -148,11 +148,11 @@ String validateRule(JSONObject rule, JSONObject screen) {
 		return "WAIT has no seconds";
 	}
 
-	if (!allConditionsMatch(screen, rule.optJSONArray("when"))) {
+	if (!allConditionsMatch(screenContents, rule.optJSONArray("when"))) {
 		return "Conditions do not match the current screen";
 	}
 
-	if (resolveAction(action, screen) == null) {
+	if (resolveAction(action, screenContents) == null) {
 		return "Click target not found on the current screen";
 	}
 
@@ -197,7 +197,7 @@ boolean goalDone = false;
 boolean finishesGoal = false;
 
 try {
-	JSONObject screen = new JSONObject(magicText.evaluateString("{" + "lv=contents_json" + "}"));
+	JSONObject screenContents = new JSONObject(magicText.evaluateString("{" + "lv=contents_json" + "}"));
 	File rulesFile = new File(appContext.getFilesDir(), RULES_FILE_NAME);
 	JSONObject rules = loadRules(rulesFile);
 	JSONObject goalRules = getOrCreateGoal(rules, goalName);
@@ -216,7 +216,7 @@ try {
 		JSONArray doneWhen = response.optJSONArray("doneWhen");
 		if (doneWhen == null || doneWhen.length() == 0) {
 			saveError = "Done has no doneWhen conditions";
-		} else if (!allConditionsMatch(screen, doneWhen)) {
+		} else if (!allConditionsMatch(screenContents, doneWhen)) {
 			saveError = "doneWhen does not match the current screen";
 		} else {
 			goalRules.put("doneWhen", doneWhen);
@@ -230,7 +230,7 @@ try {
 		saveError = "Unknown scope: " + scope;
 	} else {
 		JSONObject rule = response.getJSONObject("rule");
-		saveError = validateRule(rule, screen);
+		saveError = validateRule(rule, screenContents);
 		// A screen that only flashes by (a brief "please wait") is gone by the time it is read again here. The rule
 		// was still written for a screen that really was shown, so it is kept for the next time that screen is
 		// caught; it is only not executed now, because its target can no longer be found.
@@ -270,7 +270,7 @@ try {
 			if (!isRuleForEarlierScreen) {
 				saved = true;
 				ruleId = rule.getString("id");
-				action = resolveAction(rule.getJSONObject("action"), screen);
+				action = resolveAction(rule.getJSONObject("action"), screenContents);
 			}
 		}
 	}
@@ -292,17 +292,17 @@ System.out.println("finishesGoal = `" + finishesGoal + "`");
 boolean isScreenMismatch = saveError.endsWith(SCREEN_MISMATCH_SUFFIX);
 System.out.println("isScreenMismatch = `" + isScreenMismatch + "`");
 
-JSONObject result = new JSONObject();
-result.put("saved", saved);
-result.put("screen_mismatch", isScreenMismatch);
-result.put("done", goalDone);
-result.put("finishes_goal", finishesGoal);
-result.put("scope", scope);
-result.put("rule_id", ruleId);
-result.put("next_step", nextStep);
-result.put("action", action);
-result.put("save_error", saveError);
-resultJSON = result.toString();
+JSONObject saveResult = new JSONObject();
+saveResult.put("saved", saved);
+saveResult.put("screen_mismatch", isScreenMismatch);
+saveResult.put("done", goalDone);
+saveResult.put("finishes_goal", finishesGoal);
+saveResult.put("scope", scope);
+saveResult.put("rule_id", ruleId);
+saveResult.put("next_step", nextStep);
+saveResult.put("action", action);
+saveResult.put("save_error", saveError);
+saveResultJSON = saveResult.toString();
 
-resultJSON; // Output Variable
+saveResultJSON; // Output Variable
 

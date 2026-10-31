@@ -130,7 +130,7 @@
                 "m_booleanValue": false,
                 "m_decimalValue": 0.0,
                 "m_intValue": 0,
-                "m_name": "event_duration",
+                "m_name": "event_duration_mins",
                 "m_stringValue": "",
                 "m_type": 1,
                 "supportsInput": false,

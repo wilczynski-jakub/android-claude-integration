@@ -99,7 +99,7 @@
                 "m_booleanValue": false,
                 "m_decimalValue": 0.0,
                 "m_intValue": 0,
-                "m_name": "success",
+                "m_name": "step_success",
                 "m_stringValue": "",
                 "m_type": 0,
                 "supportsInput": false,
@@ -239,7 +239,7 @@
                 "m_booleanValue": false,
                 "m_decimalValue": 0.0,
                 "m_intValue": 0,
-                "m_name": "match_json",
+                "m_name": "match_result_json",
                 "m_stringValue": "",
                 "m_type": 2,
                 "supportsInput": false,
@@ -259,7 +259,7 @@
                 "m_booleanValue": false,
                 "m_decimalValue": 0.0,
                 "m_intValue": 0,
-                "m_name": "save_json",
+                "m_name": "save_result_json",
                 "m_stringValue": "",
                 "m_type": 2,
                 "supportsInput": false,
@@ -1070,7 +1070,7 @@
                 "m_constraintList": [],
                 "m_isDisabled": false,
                 "m_isOrCondition": false,
-                "responseVariableName": "match_json"
+                "responseVariableName": "match_result_json"
             },
             {
                 "dontLogIfConditionIsFalse": false,
@@ -1168,7 +1168,7 @@
             {
                 "blockNextAction": true,
                 "runInBackgroundThread": true,
-                "scriptText": "variableSetter.setBoolean(\"ask_success\", magicText.evaluateBoolean(\"{\" + \"lv=success\" + \"}\"));",
+                "scriptText": "variableSetter.setBoolean(\"ask_success\", magicText.evaluateBoolean(\"{\" + \"lv=step_success\" + \"}\"));",
                 "disableLogging": false,
                 "m_classType": "JavaAction",
                 "m_constraintList": [],
@@ -1291,7 +1291,7 @@
                 "m_constraintList": [],
                 "m_isDisabled": false,
                 "m_isOrCondition": false,
-                "responseVariableName": "save_json"
+                "responseVariableName": "save_result_json"
             },
             {
                 "dontLogIfConditionIsFalse": false,
@@ -1416,7 +1416,7 @@
                 "m_constraintList": [],
                 "m_isDisabled": false,
                 "m_isOrCondition": false,
-                "m_newStringValue": "{lv=match_json}"
+                "m_newStringValue": "{lv=match_result_json}"
             },
             {
                 "filename": "extract-rule-action.bsh",
@@ -1444,7 +1444,7 @@
             {
                 "blockNextAction": true,
                 "runInBackgroundThread": true,
-                "scriptText": "variableSetter.setBoolean(\"exec_success\", magicText.evaluateBoolean(\"{\" + \"lv=success\" + \"}\"));",
+                "scriptText": "variableSetter.setBoolean(\"exec_success\", magicText.evaluateBoolean(\"{\" + \"lv=step_success\" + \"}\"));",
                 "disableLogging": false,
                 "m_classType": "JavaAction",
                 "m_constraintList": [],
@@ -1884,7 +1884,7 @@
                 "m_constraintList": [],
                 "m_isDisabled": false,
                 "m_isOrCondition": false,
-                "m_newStringValue": "{lv=save_json}"
+                "m_newStringValue": "{lv=save_result_json}"
             },
             {
                 "filename": "extract-rule-action.bsh",
@@ -1912,7 +1912,7 @@
             {
                 "blockNextAction": true,
                 "runInBackgroundThread": true,
-                "scriptText": "variableSetter.setBoolean(\"exec_success\", magicText.evaluateBoolean(\"{\" + \"lv=success\" + \"}\"));",
+                "scriptText": "variableSetter.setBoolean(\"exec_success\", magicText.evaluateBoolean(\"{\" + \"lv=step_success\" + \"}\"));",
                 "disableLogging": false,
                 "m_classType": "JavaAction",
                 "m_constraintList": [],
@@ -2341,7 +2341,7 @@
                     "m_booleanValue": false,
                     "m_decimalValue": 0.0,
                     "m_intValue": 0,
-                    "m_name": "success",
+                    "m_name": "step_success",
                     "m_stringValue": "",
                     "m_type": 0,
                     "supportsInput": false,

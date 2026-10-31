@@ -13,17 +13,17 @@ System.out.println("SYSMAINT_RESTRICT_VALUE (should be true) = `" + sysmaintRest
 System.out.println("SYSMAINT_RESTRICT_CAUSE = `" + sysmaintRestrictCause + "`");
 System.out.println();
 
-int systemTime = magicText.evaluateInt("{" + "system_time" + "}");
+int systemTimeSeconds = magicText.evaluateInt("{" + "system_time" + "}");
 int sysmaintRestrictSince = magicText.evaluateInt("{" + "v=SYSMAINT_RESTRICT_SINCE" + "}");
-int triggerEnabledSecondsAgo = systemTime - sysmaintRestrictSince;
+int restrictEnabledSecondsAgo = systemTimeSeconds - sysmaintRestrictSince;
 
 System.out.println("SYSMAINT_RESTRICT_SINCE = `" + sysmaintRestrictSince + "`");
-System.out.println("triggerEnabledSecondsAgo = `" + triggerEnabledSecondsAgo + "`");
+System.out.println("restrictEnabledSecondsAgo = `" + restrictEnabledSecondsAgo + "`");
 System.out.println();
 
 int restrictDurationSeconds = 600;
 
-if (triggerEnabledSecondsAgo < restrictDurationSeconds) {
+if (restrictEnabledSecondsAgo < restrictDurationSeconds) {
 	accessibility.performGlobalAction(AccessibilityService.GLOBAL_ACTION_HOME);
 	DevicePolicyManager dpm = (DevicePolicyManager) appContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
 	dpm.lockNow();
@@ -32,4 +32,4 @@ if (triggerEnabledSecondsAgo < restrictDurationSeconds) {
 	System.out.println("SYSMAINT_RESTRICT_VALUE (after) = `" + magicText.evaluateBoolean("{" + "v=SYSMAINT_RESTRICT_VALUE" + "}") + "`");
 }
 
-triggerEnabledSecondsAgo; // Output Variable
+restrictEnabledSecondsAgo; // Output Variable

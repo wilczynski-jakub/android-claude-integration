@@ -1,5 +1,5 @@
 // Required global variable: CALENDAR_ACCOUNT
-// Required local variables: event_duration, event_title, event_description, event_location, event_calendar_name
+// Required local variables: event_duration_mins, event_title, event_description, event_location, event_calendar_name
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -8,20 +8,20 @@ import android.provider.CalendarContract;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-int eventDurationMins = magicText.evaluateInt("{" + "lv=event_duration" + "}");
+int eventDurationMins = magicText.evaluateInt("{" + "lv=event_duration_mins" + "}");
 String eventTitle = magicText.evaluateString("{" + "lv=event_title" + "}");
 String eventDescription = magicText.evaluateString("{" + "lv=event_description" + "}");
 String eventLocation = magicText.evaluateString("{" + "lv=event_location" + "}");
 String eventCalendarName = magicText.evaluateString("{" + "lv=event_calendar_name" + "}");
 
-System.out.println("event_duration = `" + eventDurationMins + "`");
+System.out.println("event_duration_mins = `" + eventDurationMins + "`");
 System.out.println("event_title = `" + eventTitle + "`");
 System.out.println("event_description = `" + eventDescription + "`");
 System.out.println("event_location = `" + eventLocation + "`");
 System.out.println("event_calendar_name = `" + eventCalendarName + "`");
 System.out.println();
 
-// event_duration > 0 means that a previous script prepared an event
+// event_duration_mins > 0 means that a previous script prepared an event
 if (eventDurationMins > 0) {
 	Calendar eventStart = Calendar.getInstance();
 	eventStart.add(Calendar.MINUTE, -eventDurationMins);
@@ -66,5 +66,5 @@ if (eventDurationMins > 0) {
 	}
 
 	// Mark the event as handled
-	variableSetter.setInt("event_duration", 0);
+	variableSetter.setInt("event_duration_mins", 0);
 }
