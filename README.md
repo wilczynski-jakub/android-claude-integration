@@ -407,29 +407,26 @@ These extensions are just MacroDroid's different names for **JSON**. Their forma
 
 In each new session, it will be figuring out these scripts again and again... That's a waste of tokens - instead, you can ask it to write a `mdr.py` file. I haven't added it to this repo, since it was "vibe coded" and you can really vibe code it yourself. But this is how it works:
 
-```math
-\begin{array}{l}
-\textcolor{#2ea043}{\texttt{ubuntu@localhost}}\texttt{:}\textcolor{#4078f2}{{\sim}\texttt{/claude-code-macrodroid}}\mathtt{\$}\texttt{\ python3\ mdr.py\ --help} \\
-\\
-\textcolor{#4078f2}{\texttt{usage:}}\texttt{\ }\textcolor{#c038c0}{\texttt{mdr.py}}\texttt{\ [-h]\ [}\textcolor{#0aa5b8}{\texttt{--limit}}\texttt{\ }\textcolor{#d4a017}{\texttt{LIMIT}}\texttt{]} \\
-\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{#2ea043}{\texttt{\{list,diff,keys,macros,macro,find,variables\}}}\texttt{\ }\textcolor{#2ea043}{\texttt{...}} \\
-\texttt{\ } \\
-\texttt{Inspect\ and\ compare\ MacroDroid\ exports\ (plain\ JSON)\ in\ `exports/`.} \\
-\texttt{\ } \\
-\textcolor{#4078f2}{\texttt{positional\ arguments:}} \\
-\texttt{\ \ }\textcolor{#2ea043}{\texttt{\{list,diff,keys,macros,macro,find,variables\}}} \\
-\texttt{\ \ \ \ }\textcolor{#2ea043}{\texttt{list}}\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ list\ exports\ with\ their\ indexes} \\
-\texttt{\ \ \ \ }\textcolor{#2ea043}{\texttt{diff}}\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ what\ changed\ between\ two\ exports} \\
-\texttt{\ \ \ \ }\textcolor{#2ea043}{\texttt{keys}}\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ top-level\ keys\ of\ a\ export} \\
-\texttt{\ \ \ \ }\textcolor{#2ea043}{\texttt{macros}}\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ all\ macros\ and\ action\ blocks} \\
-\texttt{\ \ \ \ }\textcolor{#2ea043}{\texttt{macro}}\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dump\ one\ macro:\ triggers,\ constraints,\ variables,\ actions} \\
-\texttt{\ \ \ \ }\textcolor{#2ea043}{\texttt{find}}\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ every\ value\ containing\ the\ text,\ with\ its\ JSON\ path} \\
-\texttt{\ \ \ \ }\textcolor{#2ea043}{\texttt{variables}}\texttt{\ \ \ \ \ \ \ \ \ \ \ global\ variables\ and\ their\ values} \\
-\texttt{\ } \\
-\textcolor{#4078f2}{\texttt{options:}} \\
-\texttt{\ \ }\textcolor{#0aa5b8}{\texttt{-h,\ --help}}\texttt{\ \ \ \ \ \ \ \ \ \ \ \ show\ this\ help\ message\ and\ exit} \\
-\texttt{\ \ }\textcolor{#0aa5b8}{\texttt{--limit}}\texttt{\ }\textcolor{#d4a017}{\texttt{LIMIT}}\texttt{\ \ \ \ \ \ \ \ \ max\ printed\ characters\ per\ value\ (default\ 300)} \\
-\end{array}
+```yml
+usage: mdr.py [-h] [--limit LIMIT]
+              {list,diff,keys,macros,macro,find,variables} ...
+
+Inspect and compare MacroDroid exports (plain JSON) in `exports/`.
+
+positional arguments:
+  {list,diff,keys,macros,macro,find,variables}
+
+    list                list exports with their indexes
+    diff                what changed between two exports
+    keys                top-level keys of a export
+    macros              all macros and action blocks
+    macro               dump one macro: triggers, constraints, variables, actions
+    find                every value containing the text, with its JSON path
+    variables           global variables and their values
+
+options:
+  -h, --help            show this help message and exit
+  --limit LIMIT         max printed characters per value (default 300)
 ```
 
 </details>
