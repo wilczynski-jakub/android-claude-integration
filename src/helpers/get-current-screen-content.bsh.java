@@ -1,5 +1,3 @@
-/* MacroDroid: reads nothing; writes nothing; returns screenJson (every text on screen, keyed like Read Screen Contents and JSON Output; goes to contents_str) */
-
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityWindowInfo;
 import java.util.List;
@@ -47,17 +45,16 @@ void collectText(AccessibilityNodeInfo node, JSONObject screen) {
 }
 
 List windows = accessibility.getWindows();
-JSONObject screen = new JSONObject();
+JSONObject screenContents = new JSONObject();
 
 for (int windowIndex = 0; windowIndex < windows.size(); windowIndex++) {
 	AccessibilityWindowInfo window = (AccessibilityWindowInfo) windows.get(windowIndex);
-
-	collectText(window.getRoot(), screen);
+	collectText(window.getRoot(), screenContents);
 }
 
-String screenJson = screen.toString();
+String screenContentsJSON = screenContents.toString();
 
 System.out.println("windows count = `" + windows.size() + "`");
-System.out.println("screenJson = `" + screenJson + "`");
+System.out.println("screenContentsJSON = `" +screenContentsJSON + "`");
 
-screenJson;
+screenContentsJSON; // Output Variable
