@@ -75,6 +75,106 @@
                 "m_type": 2,
                 "supportsInput": false,
                 "supportsOutput": true
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "event_calendar_name",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": true
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "event_description",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": true
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "event_duration",
+                "m_stringValue": "",
+                "m_type": 1,
+                "supportsInput": false,
+                "supportsOutput": true
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "event_location",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": true
+            },
+            {
+                "description": "",
+                "dictionary": {
+                    "entries": [],
+                    "isArray": false,
+                    "variableType": 4,
+                    "type": "Dictionary"
+                },
+                "isActionBlockWorkingVar": false,
+                "isLocalVar": true,
+                "isSecure": false,
+                "m_booleanValue": false,
+                "m_decimalValue": 0.0,
+                "m_intValue": 0,
+                "m_name": "event_title",
+                "m_stringValue": "",
+                "m_type": 2,
+                "supportsInput": false,
+                "supportsOutput": true
             }
         ],
         "localVarsAlphabetical": true,
@@ -82,6 +182,29 @@
         "m_actionList": [
             {
                 "filename": "check-current-app.bsh",
+                "pathName": "/out",
+                "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
+                "staticFilename": false,
+                "useAllFilesAccess": false,
+                "variableName": "code_content",
+                "disableLogging": false,
+                "m_classType": "ReadFileAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "blockNextAction": true,
+                "runInBackgroundThread": true,
+                "scriptText": "{lv=code_content}",
+                "disableLogging": false,
+                "m_classType": "JavaAction",
+                "m_constraintList": [],
+                "m_isDisabled": false,
+                "m_isOrCondition": false
+            },
+            {
+                "filename": "insert-calendar-event.bsh",
                 "pathName": "/out",
                 "pathUri": "content://com.android.externalstorage.documents/tree/primary%3AMacroDroid%2Fout",
                 "staticFilename": false,
