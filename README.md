@@ -1,9 +1,14 @@
-# Claude Code for MacroDroid: Android automation with AI
+# Claude integration on Android: mobile automations with AI
+<sub>This repo coveres two topics:</sub>
+1. How to use [**Claude Code** on Android](#wait-claude-code-on-android) to [conveniently](#shell-profiles-profile_termux-profile_prootdistro) edit [**MacroDroid** scripts](#how-the-scripts-reach-macrodroid) in place, directly from the device, without manual importing/exporting. (See the [example scripts](#system-maintenance-restriction-srcsysmaint-restrict) you can build.)
+
+2. How to use **Claude API** as an [autonomous agent](#ui-agent-srcui-agent) that **automatically interacts** with Android apps by tapping and navigating the screen.
 
 <details>
 <summary><h2>Some context</h2></summary>
 
 ### What is [MacroDroid](https://play.google.com/store/apps/details?id=com.arlosoft.macrodroid)?
+
 
 ![MacroDroid - Device Automation. Turn your device into a smart assistant that works for you. MacroDroid is the easiest way to automate almost anything on your phone or tablet — no coding required, just a few taps.](media/macrodroid.png)
 
@@ -28,13 +33,13 @@ There is a terminal app: [Termux](https://play.google.com/store/apps/details?id=
 
 Automated UI interactions, **supervised by Claude**. You're defining a goal, and the script **reads the current screen state** and creates *rules* for it (i.e. maps screen states to actions that should be done, e.g. clicking an element), saved to `rules.json`. When no rule matches, or the UI gets stuck, **Claude is asked via API** about what should be done.
 
-<sub>The screen recording below shows how the UI agent works when asked to scan a document.</sub>
-
 ![Screen recording - automated document scan](media/canon-print.gif)
+
+<sub>The screen recording right above this text shows how the UI agent works when asked to scan a document.</sub>
 
 | Script | What it does                                                                                                                                                                                                      |
 | --- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [ask-claude](src/ui-agent/ask-claude.bsh.java) | Sends a prompt to the **Claude API** via an HTTP request, retries it if failed                                                                                                                                    |
+| [ask-claude](src/ui-agent/ask-claude.bsh.java) | Sends a prompt to the **Claude API** via an HTTP request, retries it if failed.<br/>**Requires `api_key.txt` file** in [`/data/user/0/com.arlosoft.macrodroid/files/`](https://developer.android.com/reference/android/content/Context#getFilesDir()).                                                                                                                                    |
 | [get-current-screen-content](src/helpers/get-current-screen-content.bsh.java) | Reads every text visible on screen into a JSON object, with ***view IDs*** as values. Also used by [System Maintenance Restriction](#system-maintenance-restriction-srcsysmaint-restrict).                        |
 | [save-a-new-rule](src/ui-agent/save-a-new-rule.bsh.java) | Checks Claude's answer and maps the **current screen state** to a rule (saved to `rules.json`)                                                                                                                    |
 | [match-an-existing-rule](src/ui-agent/match-an-existing-rule.bsh.java) | Checks if there is a rule in `rules.json` for the current screen state                                                                                                                                            |
@@ -132,9 +137,9 @@ Loop for `timeout_mins` minutes:
 
 Useful for **self-discipline macros**, for example: when you want MacroDroid to **block another app**, in order for it to really work, you should neither be able to open the MacroDroid app, uninstall it nor revoke its permissions.
 
-<sub>The screen recording below shows how, as soon as the text *"MacroDroid"* is detected on screen in the Settings app, the phone gets locked.</sub>
-
 ![Screen recording - MacroDroid app settings blocked](media/installed-apps-lock.gif)
+
+<sub>The screen recording right above this text shows how, as soon as the text *"MacroDroid"* is detected on screen in the Settings app, the phone gets locked.</sub>
 
 | Script | What it does |
 | --- | --- |
