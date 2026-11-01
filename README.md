@@ -9,7 +9,6 @@
 
 ### What is [MacroDroid](https://play.google.com/store/apps/details?id=com.arlosoft.macrodroid)?
 
-
 ![MacroDroid - Device Automation. Turn your device into a smart assistant that works for you. MacroDroid is the easiest way to automate almost anything on your phone or tablet — no coding required, just a few taps.](media/macrodroid.png)
 
 Even though the description says "no coding required", it provides a way to run scripts written in Java (actually it's BeanShell, a scripting language, but even the app suggests that it's close enough to Java to call it *"Java Code"*).
@@ -20,9 +19,6 @@ I'm aware that most of the scripts in this repo could be built with MacroDroid's
 
 Moreover, when working with code, you can use AI to for code edits. Although there is an official way to [integrate Claude with MacroDroid GUI](https://wiki.macrodroid.com/wiki/index.php/Build_Macros_with_Claude_or_ChatGPT), I still find it much more convenient to rather use Claude Code for editing Java files.
 
-### Wait, Claude Code on Android?
-
-There is a terminal app: [Termux](https://play.google.com/store/apps/details?id=com.termux), that works as a Linux emulator. Claude Code has **no official Android build**, but there is a [community installer for Termux](https://github.com/ferrumclaudepilgrim/claude-code-android). (Using Claude that way may be a bit laggy, but works well with `/remote-control`.)
 
 </details>
 
@@ -345,6 +341,11 @@ When a variable changes value during runtime, you won't see it in the console ou
 ```java
 magicText.evaluateBoolean("{" + "v=SOME_VAR" + "}");
 ```
+
+### Wait, Claude Code on Android?
+
+There is a terminal app: [Termux](https://play.google.com/store/apps/details?id=com.termux), that works as a Linux emulator. Claude Code has **no official Android build**, but there is a [community installer for Termux](https://github.com/ferrumclaudepilgrim/claude-code-android). (Using Claude that way may be a bit laggy, but works well with `/remote-control`.)
+
 
 ### Shell profiles ([profile_termux](bash_profiles/profile_termux), [profile_prootdistro](bash_profiles/profile_prootdistro))
 
