@@ -383,8 +383,7 @@ To apply [profile_prootdistro](bash_profiles/profile_prootdistro), run this in t
 
 </details>
 
-<details open>
-<summary><h2>Maintenance</h2></summary>
+### Make sure your Claude behaves
 
 When coding with Claude, it's good practice to **define some rules**, e.g. in a `CLAUDE.md` file.
 
@@ -468,7 +467,5 @@ options:
   -h, --help            show this help message and exit
   --limit LIMIT         max printed characters per value (default 300)
 ```
-
-</details>
 
 </details>
