@@ -27,7 +27,7 @@
         {
             "description": "",
             "isActionBlockWorkingVar": true,
-            "m_name": "SYSMAINT_RESTRICT_VALUE",
+            "m_name": "SYSMAINT_RESTRICT_ENABLED",
             "m_stringValue": "",
             "supportsOutput": true
         }
@@ -52,7 +52,7 @@
                 "m_variable": {
                     "description": "",
                     "isActionBlockWorkingVar": true,
-                    "m_name": "SYSMAINT_RESTRICT_VALUE",
+                    "m_name": "SYSMAINT_RESTRICT_ENABLED",
                     "m_stringValue": "",
                     "supportsOutput": true
                 },

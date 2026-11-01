@@ -1,4 +1,4 @@
-// Required global variables: SYSMAINT_RESTRICT_VALUE, SYSMAINT_RESTRICT_SINCE, SYSMAINT_RESTRICT_CAUSE
+// Required global variables: SYSMAINT_RESTRICT_ENABLED, SYSMAINT_RESTRICT_SINCE, SYSMAINT_RESTRICT_CAUSE
 
 import android.accessibilityservice.AccessibilityService;
 import android.app.admin.DevicePolicyManager;
@@ -7,9 +7,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
-boolean sysmaintRestrictValue = magicText.evaluateBoolean("{" + "v=SYSMAINT_RESTRICT_VALUE" + "}");
+boolean sysmaintRestrictEnabled = magicText.evaluateBoolean("{" + "v=SYSMAINT_RESTRICT_ENABLED" + "}");
 String sysmaintRestrictCause = magicText.evaluateString("{" + "v=SYSMAINT_RESTRICT_CAUSE" + "}");
-System.out.println("SYSMAINT_RESTRICT_VALUE (should be true) = `" + sysmaintRestrictValue + "`");
+System.out.println("SYSMAINT_RESTRICT_ENABLED (should be true) = `" + sysmaintRestrictEnabled + "`");
 System.out.println("SYSMAINT_RESTRICT_CAUSE = `" + sysmaintRestrictCause + "`");
 System.out.println();
 
@@ -28,8 +28,8 @@ if (restrictEnabledSecondsAgo < restrictDurationSeconds) {
 	DevicePolicyManager dpm = (DevicePolicyManager) appContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
 	dpm.lockNow();
 } else {
-	variableSetter.setBoolean("SYSMAINT_RESTRICT_VALUE", false);
-	System.out.println("SYSMAINT_RESTRICT_VALUE (after) = `" + magicText.evaluateBoolean("{" + "v=SYSMAINT_RESTRICT_VALUE" + "}") + "`");
+	variableSetter.setBoolean("SYSMAINT_RESTRICT_ENABLED", false);
+	System.out.println("SYSMAINT_RESTRICT_ENABLED (after) = `" + magicText.evaluateBoolean("{" + "v=SYSMAINT_RESTRICT_ENABLED" + "}") + "`");
 }
 
 restrictEnabledSecondsAgo; // Output Variable

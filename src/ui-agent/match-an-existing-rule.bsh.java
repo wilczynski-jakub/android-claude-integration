@@ -1,4 +1,4 @@
-// Required local variables: goal_name, current_step, contents_json
+// Required local variables: goal_name, current_step, screen_contents_json
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -52,14 +52,14 @@ JSONObject createEmptyRules() {
 }
 
 JSONObject createEmptyGoal() {
-	JSONObject goalRules = new JSONObject();
+	JSONObject goal = new JSONObject();
 
-	goalRules.put("description", "");
-	goalRules.put("firstStep", DEFAULT_FIRST_STEP);
-	goalRules.put("doneWhen", new JSONArray());
-	goalRules.put("steps", new JSONObject());
+	goal.put("description", "");
+	goal.put("firstStep", DEFAULT_FIRST_STEP);
+	goal.put("doneWhen", new JSONArray());
+	goal.put("steps", new JSONObject());
 
-	return goalRules;
+	return goal;
 }
 
 // Returns the saved rules, unless they predate the current RULES_RESET_ID: then they are moved aside as a
@@ -248,23 +248,23 @@ String filteredScreen = "";
 String matchError = "";
 
 try {
-	JSONObject screenContents = new JSONObject(magicText.evaluateString("{" + "lv=contents_json" + "}"));
+	JSONObject screenContents = new JSONObject(magicText.evaluateString("{" + "lv=screen_contents_json" + "}"));
 	File rulesFile = new File(appContext.getFilesDir(), RULES_FILE_NAME);
 	JSONObject rules = loadRules(rulesFile);
-	JSONObject goalRules = getOrCreateGoal(rules, goalName, rulesFile);
+	JSONObject goal = getOrCreateGoal(rules, goalName, rulesFile);
 	if (currentStep.length() == 0) {
-		currentStep = goalRules.getString("firstStep");
+		currentStep = goal.getString("firstStep");
 		System.out.println("currentStep (from firstStep) = `" + currentStep + "`");
 	}
 
 	filteredScreen = buildFilteredScreen(screenContents);
 	nextStep = currentStep;
-	goalDone = isGoalDone(screenContents, goalRules.optJSONArray("doneWhen"));
+	goalDone = isGoalDone(screenContents, goal.optJSONArray("doneWhen"));
 	if (!goalDone) {
 		JSONObject rule = findMatchingRule(rules.optJSONArray("globalRules"), screenContents);
 		boolean isGlobalRule = rule != null;
 		if (!isGlobalRule) {
-			JSONArray stepRules = goalRules.getJSONObject("steps").optJSONArray(currentStep);
+			JSONArray stepRules = goal.getJSONObject("steps").optJSONArray(currentStep);
 			rule = findMatchingRule(stepRules, screenContents);
 		}
 

@@ -97,8 +97,8 @@ boolean isTrue(Object value) {
 }
 
 void planError(JSONObject plan, String message) {
-	plan.put("call", "ERROR");
-	plan.put("message", message);
+	plan.put("plannedNextStep","ERROR");
+	plan.put("statusMessage",message);
 }
 
 void showToast(String toastText) {
@@ -147,8 +147,8 @@ void writeFile(File file, String content) {
 
 JSONObject stepsOfGoal(JSONObject rules, String goalName) {
 	JSONObject goals = rules.optJSONObject("goals");
-	JSONObject goalRules = goals == null ? null : goals.optJSONObject(goalName);
-	JSONObject steps = goalRules == null ? null : goalRules.optJSONObject("steps");
+	JSONObject goal = goals == null ? null : goals.optJSONObject(goalName);
+	JSONObject steps = goal == null ? null : goal.optJSONObject("steps");
 	if (steps == null) {
 		return new JSONObject();
 	}
@@ -222,7 +222,7 @@ void appendDisabledRules(JSONArray ruleList, StringBuilder failedRulesDescriptio
 }
 
 // The disabled global rules and the disabled rules of this step, one JSON object per line, or "none".
-String describeFailedRules(String goalName, String step) {
+String describeFailedRules(String goalName, String currentStep) {
 	File rulesFile = new File(appContext.getFilesDir(), RULES_FILE_NAME);
 	if (!rulesFile.exists()) {
 		return "none";
@@ -231,7 +231,7 @@ String describeFailedRules(String goalName, String step) {
 	JSONObject rules = new JSONObject(readFile(rulesFile));
 	StringBuilder failedRulesDescription = new StringBuilder();
 	appendDisabledRules(rules.optJSONArray("globalRules"), failedRulesDescription);
-	appendDisabledRules(stepsOfGoal(rules, goalName).optJSONArray(step), failedRulesDescription);
+	appendDisabledRules(stepsOfGoal(rules, goalName).optJSONArray(currentStep), failedRulesDescription);
 	if (failedRulesDescription.length() == 0) {
 		return "none";
 	}
@@ -440,39 +440,39 @@ boolean retryOrDisableUselessRule(String goalName, JSONObject agentMemory, Strin
 		addHistory(agentMemory, "That action did not change the screen");
 
 		// The step goes back so the rule can match again; if the screen changes late after all, the step it led to is restored.
-		agentMemory.put("lateScreenChange", executedRule);
+		agentMemory.put("ruleToRetryWhenScreenUnchanged", executedRule);
 	}
 
 	System.out.println();
 	plan.put("currentStep", executedRule.optString("stepBefore"));
-	plan.put("call", "MATCH");
+	plan.put("plannedNextStep","MATCH");
 
 	return true;
 }
 
-// The retried rule's action did work, only slower than the wait after it: carry on from the step it leads to.
+// The action of the rule to retry did work, only slower than the wait after it: carry on from the step it leads to.
 // Returns true when Match has to run again for that step.
 boolean resumeAfterLateScreenChange(JSONObject agentMemory, String filteredScreen, JSONObject plan) {
-	JSONObject retriedRule = agentMemory.optJSONObject("lateScreenChange");
-	agentMemory.remove("lateScreenChange");
-	if (retriedRule == null || isSameScreen(filteredScreen, retriedRule.optString("screenBefore"))) {
+	JSONObject ruleToRetryWhenScreenUnchanged = agentMemory.optJSONObject("ruleToRetryWhenScreenUnchanged");
+	agentMemory.remove("ruleToRetryWhenScreenUnchanged");
+	if (ruleToRetryWhenScreenUnchanged == null || isSameScreen(filteredScreen, ruleToRetryWhenScreenUnchanged.optString("screenBefore"))) {
 		return false;
 	}
 
-	System.out.println("lateScreenChange.ruleId = `" + retriedRule.optString("ruleId") + "`");
+	System.out.println("ruleToRetryWhenScreenUnchanged.ruleId = `" + ruleToRetryWhenScreenUnchanged.optString("ruleId") + "`");
 	System.out.println();
 
 	agentMemory.remove("unchangedScreenStreak");
-	plan.put("currentStep", retriedRule.optString("stepAfter"));
-	plan.put("call", "MATCH");
+	plan.put("currentStep", ruleToRetryWhenScreenUnchanged.optString("stepAfter"));
+	plan.put("plannedNextStep","MATCH");
 
 	return true;
 }
 
-String buildPrompt(String goalName, String goalDescription, String step, String historyDescription, String failedRulesDescription, String userInstruction, String filteredScreen) {
+String buildPrompt(String goalName, String goalDescription, String currentStep, String historyDescription, String failedRulesDescription, String userInstruction, String filteredScreen) {
 	return "Goal: " + goalName + "\n"
 		+ "Goal description: " + goalDescription + "\n"
-		+ "Current step: " + step + "\n"
+		+ "Current step: " + currentStep + "\n"
 		+ "User instruction for this screen: " + userInstruction + "\n"
 		+ "History of this run: " + historyDescription + "\n"
 		+ "Failed rules (their action did not change the screen): " + failedRulesDescription + "\n"
@@ -514,8 +514,8 @@ void planAfterMatch(String goalName, String goalDescription, int maxApiCalls, JS
 	String nextStep = matchResult.optString("next_step");
 	plan.put("currentStep", nextStep);
 	if (isTrue(matchResult.opt("done"))) {
-		plan.put("call", "DONE");
-		plan.put("message", "API calls: " + agentMemory.optInt("apiCalls"));
+		plan.put("plannedNextStep","DONE");
+		plan.put("statusMessage","API calls: " + agentMemory.optInt("apiCalls"));
 		return;
 	}
 
@@ -532,7 +532,7 @@ void planAfterMatch(String goalName, String goalDescription, int maxApiCalls, JS
 
 		showActionToast(matchResult, "matched rule");
 		rememberExecutedRule(agentMemory, matchResult, filteredScreen, matchResult.optString("current_step"));
-		plan.put("call", "EXECUTE_MATCH");
+		plan.put("plannedNextStep","EXECUTE_MATCH");
 
 		return;
 	}
@@ -541,7 +541,7 @@ void planAfterMatch(String goalName, String goalDescription, int maxApiCalls, JS
 	System.out.println("isSameScreenAsLastAsk = `" + isSameScreenAsLastAsk + "`");
 	if (isSameScreenAsLastAsk) {
 		Thread.sleep(SAME_SCREEN_WAIT_MS);
-		plan.put("call", "MATCH");
+		plan.put("plannedNextStep","MATCH");
 		return;
 	}
 
@@ -553,20 +553,20 @@ void planAfterMatch(String goalName, String goalDescription, int maxApiCalls, JS
 	planAsk(goalName, goalDescription, nextStep, NO_USER_INSTRUCTION, filteredScreen, agentMemory, plan);
 }
 
-void planAsk(String goalName, String goalDescription, String step, String userInstruction, String filteredScreen, JSONObject agentMemory, JSONObject plan) {
+void planAsk(String goalName, String goalDescription, String currentStep, String userInstruction, String filteredScreen, JSONObject agentMemory, JSONObject plan) {
 	agentMemory.put("apiCalls", agentMemory.optInt("apiCalls") + 1);
 	agentMemory.put("lastAskedScreen", filteredScreen);
-	agentMemory.put("lastAskedStep", step);
+	agentMemory.put("lastAskedStep", currentStep);
 
 	String historyDescription = describeHistory(agentMemory, filteredScreen);
-	String failedRulesDescription = describeFailedRules(goalName, step);
+	String failedRulesDescription = describeFailedRules(goalName, currentStep);
 	System.out.println("historyDescription = `" + historyDescription + "`");
 	System.out.println("failedRulesDescription = `" + failedRulesDescription + "`");
 	System.out.println("userInstruction = `" + userInstruction + "`");
 
-	plan.put("currentStep", step);
-	plan.put("call", "ASK");
-	plan.put("prompt", buildPrompt(goalName, goalDescription, step, historyDescription, failedRulesDescription, userInstruction, filteredScreen));
+	plan.put("currentStep", currentStep);
+	plan.put("plannedNextStep","ASK");
+	plan.put("prompt", buildPrompt(goalName, goalDescription, currentStep, historyDescription, failedRulesDescription, userInstruction, filteredScreen));
 	plan.put("systemPrompt", SYSTEM_PROMPT_TEMPLATE.replace("<", "{").replace(">", "}"));
 }
 
@@ -603,9 +603,9 @@ void planAfterError(JSONObject agentMemory, JSONObject plan) {
 	variableSetter.setString("user_instruction", "");
 	agentMemory.put("userInstruction", userInstruction);
 	agentMemory.remove("executedRule");
-	agentMemory.remove("lateScreenChange");
+	agentMemory.remove("ruleToRetryWhenScreenUnchanged");
 	addHistory(agentMemory, "The automation got stuck and the user gave this instruction: " + userInstruction);
-	plan.put("call", "MATCH");
+	plan.put("plannedNextStep","MATCH");
 }
 
 void planAfterAsk(JSONObject plan) {
@@ -616,7 +616,7 @@ void planAfterAsk(JSONObject plan) {
 		return;
 	}
 
-	plan.put("call", "SAVE");
+	plan.put("plannedNextStep","SAVE");
 }
 
 void planAfterSave(JSONObject agentMemory, JSONObject plan) {
@@ -640,14 +640,14 @@ void planAfterSave(JSONObject agentMemory, JSONObject plan) {
 	if (isTrue(saveResult.opt("screen_mismatch"))) {
 		agentMemory.put("lastAskedScreen", "");
 		addHistory(agentMemory, "A proposed rule no longer fitted the screen, which had changed meanwhile");
-		plan.put("call", "MATCH");
+		plan.put("plannedNextStep","MATCH");
 		return;
 	}
 
 	// Claude judged the screen to prove the goal finished, and Save confirmed its conditions hold on that screen.
 	if (isTrue(saveResult.opt("done"))) {
-		plan.put("call", "DONE");
-		plan.put("message", "API calls: " + agentMemory.optInt("apiCalls"));
+		plan.put("plannedNextStep","DONE");
+		plan.put("statusMessage","API calls: " + agentMemory.optInt("apiCalls"));
 		return;
 	}
 
@@ -659,7 +659,7 @@ void planAfterSave(JSONObject agentMemory, JSONObject plan) {
 	plan.put("currentStep", saveResult.optString("next_step"));
 	showActionToast(saveResult, "new rule from Claude");
 	rememberExecutedRule(agentMemory, saveResult, agentMemory.optString("lastAskedScreen"), agentMemory.optString("lastAskedStep"));
-	plan.put("call", "EXECUTE_SAVED");
+	plan.put("plannedNextStep","EXECUTE_SAVED");
 }
 
 void planAfterExecute(JSONObject agentMemory, JSONObject plan) {
@@ -676,25 +676,25 @@ void planAfterExecute(JSONObject agentMemory, JSONObject plan) {
 	boolean finishesGoal = executedRule != null && executedRule.optBoolean("finishesGoal");
 	System.out.println("finishesGoal = `" + finishesGoal + "`");
 	if (finishesGoal) {
-		plan.put("call", "DONE");
-		plan.put("message", "API calls: " + agentMemory.optInt("apiCalls"));
+		plan.put("plannedNextStep","DONE");
+		plan.put("statusMessage","API calls: " + agentMemory.optInt("apiCalls"));
 		return;
 	}
 
-	plan.put("call", "MATCH");
+	plan.put("plannedNextStep","MATCH");
 }
 
-// Clears the variable the planned call writes its result to, so a call that fails
-// without writing anything is never mistaken for the result of an earlier call.
-void clearResultOf(String call) {
-	if (call.equals("MATCH")) {
+// Clears the variable the planned next step writes its result to, so a step that fails
+// without writing anything is never mistaken for the result of an earlier step.
+void clearResultOf(String plannedNextStep) {
+	if (plannedNextStep.equals("MATCH")) {
 		variableSetter.setString("match_result_json", "");
-	} else if (call.equals("ASK")) {
+	} else if (plannedNextStep.equals("ASK")) {
 		variableSetter.setBoolean("ask_success", false);
 		variableSetter.setString("response_text", "");
-	} else if (call.equals("SAVE")) {
+	} else if (plannedNextStep.equals("SAVE")) {
 		variableSetter.setString("save_result_json", "");
-	} else if (call.startsWith("EXECUTE")) {
+	} else if (plannedNextStep.startsWith("EXECUTE")) {
 		variableSetter.setBoolean("exec_success", false);
 	}
 }
@@ -703,46 +703,46 @@ String goalName = magicValue("lv=goal_name");
 String goalDescription = magicValue("lv=goal_description");
 int maxApiCalls = Integer.parseInt(magicValue("lv=max_api_calls").trim());
 JSONObject agentMemory = parseJSON(magicValue("lv=agent_memory_json"));
-String lastCall = agentMemory.optString("lastCall");
+String previousStep = agentMemory.optString("previousStep");
 
 System.out.println("goal_name = `" + goalName + "`");
 System.out.println("goalDescription = `" + goalDescription + "`");
 System.out.println("maxApiCalls = `" + maxApiCalls + "`");
-System.out.println("lastCall = `" + lastCall + "`");
+System.out.println("previousStep = `" + previousStep + "`");
 System.out.println("agentMemory.apiCalls (before) = `" + agentMemory.optInt("apiCalls") + "`");
 System.out.println();
 
 JSONObject plan = new JSONObject();
-plan.put("call", "MATCH");
-plan.put("message", "");
+plan.put("plannedNextStep","MATCH");
+plan.put("statusMessage","");
 
 try {
-	if (lastCall.equals("MATCH")) {
+	if (previousStep.equals("MATCH")) {
 		planAfterMatch(goalName, goalDescription, maxApiCalls, agentMemory, plan);
-	} else if (lastCall.equals("ASK")) {
+	} else if (previousStep.equals("ASK")) {
 		planAfterAsk(plan);
-	} else if (lastCall.equals("SAVE")) {
+	} else if (previousStep.equals("SAVE")) {
 		planAfterSave(agentMemory, plan);
-	} else if (lastCall.startsWith("EXECUTE")) {
+	} else if (previousStep.startsWith("EXECUTE")) {
 		planAfterExecute(agentMemory, plan);
-	} else if (lastCall.equals("ERROR")) {
+	} else if (previousStep.equals("ERROR")) {
 		planAfterError(agentMemory, plan);
 	}
 } catch (Exception exception) {
 	planError(plan, exception.toString());
 }
 
-agentMemory.put("lastCall", plan.getString("call"));
-clearResultOf(plan.getString("call"));
+agentMemory.put("previousStep", plan.getString("plannedNextStep"));
+clearResultOf(plan.getString("plannedNextStep"));
 
 System.out.println();
-System.out.println("plan.call = `" + plan.getString("call") + "`");
-System.out.println("plan.message = `" + plan.getString("message") + "`");
+System.out.println("plan.plannedNextStep = `" + plan.getString("plannedNextStep") + "`");
+System.out.println("plan.statusMessage = `" + plan.getString("statusMessage") + "`");
 System.out.println("plan.currentStep = `" + plan.optString("currentStep") + "`");
 System.out.println("agentMemory.apiCalls (after) = `" + agentMemory.optInt("apiCalls") + "`");
 
-variableSetter.setString("call", plan.getString("call"));
-variableSetter.setString("message", plan.getString("message"));
+variableSetter.setString("planned_next_step",plan.getString("plannedNextStep"));
+variableSetter.setString("status_message", plan.getString("statusMessage"));
 variableSetter.setString("agent_memory_json", agentMemory.toString());
 if (plan.has("currentStep")) {
 	variableSetter.setString("current_step", plan.getString("currentStep"));

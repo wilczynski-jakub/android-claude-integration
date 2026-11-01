@@ -3,7 +3,7 @@
         {
             "description": "",
             "isActionBlockWorkingVar": true,
-            "m_name": "SYSMAINT_RESTRICT_VALUE",
+            "m_name": "SYSMAINT_RESTRICT_ENABLED",
             "m_stringValue": "",
             "supportsOutput": true
         }
@@ -22,7 +22,7 @@
             },
             {
                 "isLocalVar": true,
-                "m_name": "contents_json",
+                "m_name": "screen_contents_json",
                 "m_stringValue": "",
                 "m_type": 2,
                 "supportsOutput": true
@@ -94,7 +94,7 @@
             },
             {
                 "blockNextAction": true,
-                "responseVariableName": "contents_json",
+                "responseVariableName": "screen_contents_json",
                 "runInBackgroundThread": true,
                 "scriptText": "{lv=code_content}",
                 "m_SIGUID": 0,
@@ -192,7 +192,7 @@
                 "m_stringEqual": true,
                 "m_stringValue": "com.google.android.youtube",
                 "m_variable": {
-                    "m_name": "SYSMAINT_RESTRICT_VALUE",
+                    "m_name": "SYSMAINT_RESTRICT_ENABLED",
                     "m_stringValue": "",
                     "supportsInput": true,
                     "supportsOutput": true

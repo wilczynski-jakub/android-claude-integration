@@ -1,4 +1,4 @@
-// Required local variable: message
+// Required local variable: status_message
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -86,7 +86,7 @@ String askForInstruction(String message, int timeoutSeconds) {
 // Clear the output first, so a run that fails midway never leaves the previous run's instruction behind.
 variableSetter.setString("user_instruction", "");
 
-String errorMessage = magicText.evaluateString("{" + "lv=message" + "}");
+String errorMessage = magicText.evaluateString("{" + "lv=status_message" + "}");
 System.out.println("errorMessage = `" + errorMessage + "`");
 
 String dialogMessage = "It stopped with this error:\n" + errorMessage

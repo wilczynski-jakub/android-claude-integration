@@ -3,7 +3,7 @@
         {
             "description": "",
             "isActionBlockWorkingVar": true,
-            "m_name": "SYSMAINT_RESTRICT_VALUE",
+            "m_name": "SYSMAINT_RESTRICT_ENABLED",
             "m_stringValue": "",
             "supportsOutput": true
         }
@@ -58,7 +58,7 @@
                 "m_stringEqual": true,
                 "m_stringValue": "com.google.android.youtube",
                 "m_variable": {
-                    "m_name": "SYSMAINT_RESTRICT_VALUE",
+                    "m_name": "SYSMAINT_RESTRICT_ENABLED",
                     "m_stringValue": "",
                     "supportsInput": true,
                     "supportsOutput": true

@@ -1,4 +1,4 @@
-// Required local variables: goal_name, current_step, response_text, contents_json
+// Required local variables: goal_name, current_step, response_text, screen_contents_json
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -50,12 +50,12 @@ JSONObject loadRules(File rulesFile) {
 JSONObject getOrCreateGoal(JSONObject rules, String goalName) {
 	JSONObject goals = rules.getJSONObject("goals");
 	if (!goals.has(goalName)) {
-		JSONObject goalRules = new JSONObject();
-		goalRules.put("description", "");
-		goalRules.put("firstStep", DEFAULT_FIRST_STEP);
-		goalRules.put("doneWhen", new JSONArray());
-		goalRules.put("steps", new JSONObject());
-		goals.put(goalName, goalRules);
+		JSONObject goal = new JSONObject();
+		goal.put("description", "");
+		goal.put("firstStep", DEFAULT_FIRST_STEP);
+		goal.put("doneWhen", new JSONArray());
+		goal.put("steps", new JSONObject());
+		goals.put(goalName, goal);
 	}
 
 	return goals.getJSONObject(goalName);
@@ -169,13 +169,13 @@ boolean ruleIdExists(JSONArray rules, String ruleId) {
 	return false;
 }
 
-JSONArray getOrCreateStepRules(JSONObject goalRules, String step) {
-	JSONObject steps = goalRules.getJSONObject("steps");
-	if (!steps.has(step)) {
-		steps.put(step, new JSONArray());
+JSONArray getOrCreateStepRules(JSONObject goal, String currentStep) {
+	JSONObject steps = goal.getJSONObject("steps");
+	if (!steps.has(currentStep)) {
+		steps.put(currentStep, new JSONArray());
 	}
 
-	return steps.getJSONArray(step);
+	return steps.getJSONArray(currentStep);
 }
 
 String goalName = magicText.evaluateString("{" + "lv=goal_name" + "}");
@@ -197,12 +197,12 @@ boolean goalDone = false;
 boolean finishesGoal = false;
 
 try {
-	JSONObject screenContents = new JSONObject(magicText.evaluateString("{" + "lv=contents_json" + "}"));
+	JSONObject screenContents = new JSONObject(magicText.evaluateString("{" + "lv=screen_contents_json" + "}"));
 	File rulesFile = new File(appContext.getFilesDir(), RULES_FILE_NAME);
 	JSONObject rules = loadRules(rulesFile);
-	JSONObject goalRules = getOrCreateGoal(rules, goalName);
+	JSONObject goal = getOrCreateGoal(rules, goalName);
 	if (currentStep.length() == 0) {
-		currentStep = goalRules.getString("firstStep");
+		currentStep = goal.getString("firstStep");
 		nextStep = currentStep;
 		System.out.println("currentStep (from firstStep) = `" + currentStep + "`");
 	}
@@ -219,7 +219,7 @@ try {
 		} else if (!allConditionsMatch(screenContents, doneWhen)) {
 			saveError = "doneWhen does not match the current screen";
 		} else {
-			goalRules.put("doneWhen", doneWhen);
+			goal.put("doneWhen", doneWhen);
 			writeFile(rulesFile, rules.toString(2));
 			System.out.println("doneWhen = `" + doneWhen + "`");
 			System.out.println();
@@ -252,7 +252,7 @@ try {
 
 				nextStep = rule.getString("nextStep");
 				finishesGoal = rule.optBoolean("finishesGoal");
-				targetRules = getOrCreateStepRules(goalRules, currentStep);
+				targetRules = getOrCreateStepRules(goal, currentStep);
 			}
 
 			if (ruleIdExists(targetRules, rule.getString("id"))) {

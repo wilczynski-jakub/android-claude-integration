@@ -38,9 +38,9 @@ Automated UI interactions, **supervised by Claude**. You're defining a goal, and
 | [get-current-screen-content](src/helpers/get-current-screen-content.bsh.java) | Reads every text visible on screen into a JSON object, with ***view IDs*** as values. Also used by [System Maintenance Restriction](#system-maintenance-restriction-srcsysmaint-restrict). |
 | [save-a-new-rule](src/ui-agent/save-a-new-rule.bsh.java) | Checks Claude's answer and maps the **current screen state** to a rule (saved to `rules.json`) |
 | [match-an-existing-rule](src/ui-agent/match-an-existing-rule.bsh.java) | Checks if there is a rule in `rules.json` for the current screen state |
-| [run-a-single-ui-action](src/ui-agent/run-a-single-ui-action.bsh.java) | Extracts `actionType`, `actionViewId` and `actionSeconds` from a matched rule |
+| [extract-rule-action](src/ui-agent/extract-rule-action.bsh.java) | Extracts the action of a matched rule into the `action_dict` dictionary (keys: `type`, `view_id`, `seconds`) |
 | [ask-user-for-instruction](src/ui-agent/ask-user-for-instruction.bsh.java) | After an error, asks the user what should happen on the current screen |
-| [run-multiple-ui-actions](src/ui-agent/run-multiple-ui-actions.bsh.java) | Together with all scripts above, **decides what should happen next** (whether to ask Claude for a new rule, or do the UI action based on an existing rule, etc.). |
+| [plan-next-step](src/ui-agent/plan-next-step.bsh.java) | Together with all scripts above, **decides what should happen next** (whether to ask Claude for a new rule, or do the UI action based on an existing rule, etc.). |
 
 #### Example workflow
 <details>
@@ -53,48 +53,48 @@ Macro: [UI Agent](macros/UI_Agent.macro.json)
 </summary>
 
 Loop for `timeout_mins` minutes:
-> Run: `run-multiple-ui-actions.bsh`
-> <sub><br/>Output Variable: `call`</sub>
+> Run: `plan-next-step.bsh`
+> <sub><br/>Output Variable: `planned_next_step`</sub>
 >
 > ```java
-> if (call == "MATCH") {
+> if (planned_next_step == "MATCH") {
 > ```
 > > Run: `get-current-screen-content.bsh`
-> > <sub><br/>Output Variable: `contents_str`</sub>
+> > <sub><br/>Output Variable: `screen_contents_json`</sub>
 > >
 > > Run: `match-an-existing-rule.bsh`
-> > <sub><br/>Output Variable: `match_str`</sub>
+> > <sub><br/>Output Variable: `match_json`</sub>
 >
 > ```java
-> } else if (call == "ASK") {
+> } else if (planned_next_step == "ASK") {
 > ```
 > 
 > > Run: `ask-claude.bsh`
 > > <sub><br/>Output Variable: `ask_success`</sub>
 >
 > ```java
-> } else if (call == "SAVE") {
+> } else if (planned_next_step == "SAVE") {
 > ```
 >
 > > Run: `get-current-screen-content.bsh`
-> > <sub><br/>Output Variable: `contents_str`</sub>
+> > <sub><br/>Output Variable: `screen_contents_json`</sub>
 > 
 > > Run: `save-a-new-rule.bsh`
-> > <sub><br/>Output Variable: `save_str`</sub>
+> > <sub><br/>Output Variable: `save_json`</sub>
 >
 > ```java
-> } else if (call == "EXECUTE_MATCH" || call == "EXECUTE_SAVED") {
+> } else if (planned_next_step == "EXECUTE_MATCH" || planned_next_step == "EXECUTE_SAVED") {
 > ```
 >
 > > ```java
-> > if (call == "EXECUTE_MATCH") {
-> >   rules_json = "{lv=match_str}"
-> > } else if (call == "EXECUTE_SAVED") {
-> >   rules_json = "{lv=save_str}"
+> > if (planned_next_step == "EXECUTE_MATCH") {
+> >   rule_result_json = "{lv=match_json}"
+> > } else if (planned_next_step == "EXECUTE_SAVED") {
+> >   rule_result_json = "{lv=save_json}"
 > > }
 > > ```
 >
-> > Run: `run-a-single-ui-action.bsh`
+> > Run: `extract-rule-action.bsh`
 > > <sub><br/>Output Variable: `action_dict`</sub>
 >
 > > Click `action_dict["view_id"]`
@@ -107,13 +107,13 @@ Loop for `timeout_mins` minutes:
 > > <sub><br/>Constraint: `action_dict["type"] == "WAIT"`</sub>
 >
 > ```java
-> } else if (call == "DONE") {
+> } else if (planned_next_step == "DONE") {
 > ```
 >
 > > Break from loop
 >
 > ```java
-> } else if (call == "ERROR") {
+> } else if (planned_next_step == "ERROR") {
 > ```
 >
 > > Run: `ask-user-for-instruction.bsh`
@@ -138,8 +138,8 @@ Useful for **self-discipline macros**, for example: when you want MacroDroid to 
 
 | Script | What it does |
 | --- | --- |
-| [invoke-lock](src/sysmaint-restrict/invoke-lock.bsh.java) | When the `SYSMAINT_RESTRICT_SINCE` timestamp is not before 10 minutes ago, the script uses ***AccessibilityService*** to launch the home screen and ***DevicePolicyManager*** to lock the phone (without the ability to quickly unlock with biometrics). Otherwise it sets `SYSMAINT_RESTRICT_VALUE` to false. |
-| [search-in-screen-content](src/helpers/search-in-screen-content.bsh.java) | Searches the result of [get-current-screen-content](src/helpers/get-current-screen-content.bsh.java) (in local variable: `contents_str`) for a given regex (local variable: `regex_to_search`). The boolean result goes to `found_on_screen`. |
+| [invoke-lock](src/sysmaint-restrict/invoke-lock.bsh.java) | When the `SYSMAINT_RESTRICT_SINCE` timestamp is not before 10 minutes ago, the script uses ***AccessibilityService*** to launch the home screen and ***DevicePolicyManager*** to lock the phone (without the ability to quickly unlock with biometrics). Otherwise it sets `SYSMAINT_RESTRICT_ENABLED` to false. |
+| [search-in-screen-content](src/helpers/search-in-screen-content.bsh.java) | Searches the result of [get-current-screen-content](src/helpers/get-current-screen-content.bsh.java) (in local variable: `screen_contents_json`) for a given regex (local variable: `regex_to_search`). The boolean result goes to `found_on_screen`. |
 
 #### Example workflow
 Let's say we want to **block YouTube** after using it for more than 15 minutes:
@@ -167,7 +167,7 @@ APP_TIME_COUNT > 15
 <td>
 
 ```java
-SYSMAINT_RESTRICT_VALUE = true
+SYSMAINT_RESTRICT_ENABLED = true
 SYSMAINT_RESTRICT_SINCE = {system_time}
 ```
 
@@ -183,7 +183,7 @@ SYSMAINT_RESTRICT_SINCE = {system_time}
 
 ```java
 "{fg_app_package}" == "com.google.android.youtube"
-&& SYSMAINT_RESTRICT_VALUE == true
+&& SYSMAINT_RESTRICT_ENABLED == true
 ```
 
 </td>
@@ -203,7 +203,7 @@ Run: `invoke-lock.bsh`
 
 ```java
 "{fg_activity_class}" == "com.android.settings.SubSettings"
-&& SYSMAINT_RESTRICT_VALUE == true
+&& SYSMAINT_RESTRICT_ENABLED == true
 ```
 
 </td>
@@ -214,7 +214,7 @@ regex_to_search = "MacroDroid"
 ```
 
 Run: `get-current-screen-content.bsh`
-<sub><br/>Output Variable: `contents_str`</sub>
+<sub><br/>Output Variable: `screen_contents_json`</sub>
 
 Run: `search-in-screen-content.bsh`
 <sub><br/>Output Variable: `found_on_screen`</sub>
@@ -234,8 +234,11 @@ Logs events to your calendar, very useful when you sometimes wonder: ***"What wa
 
 | Script | What it does |
 | --- | --- |
-| [check-location](src/calendar-log/check-location.bsh.java) | Calculates the distance between the **current location** and the previous one - if greater than **100 m**, increments `LOC_TRAVEL_TIME`. Sets the global variables: `LOC_NOW_LAT`, `LOC_NOW_LON`, `LOC_MAP_URL`. Creates a **calendar event** after a finished trip (or when `LOC_TRAVEL_TIME >= LOC_MAX_EVENT_TIME`). |
-| [check-current-app](src/calendar-log/check-current-app.bsh.java) | Sets the global variables: `APP_NAME`, `APP_PACKAGE`, increments `APP_TIME_COUNT` if **app didn't change** since last check. Creates a **calendar event** after a long series of usage of a single app. |
+| [check-location](src/calendar-log/check-location.bsh.java) | Calculates the distance between the **current location** and the previous one - if greater than **100 m**, increments `LOC_TRAVEL_TIME`. Sets the global variables: `LOC_NOW_LAT`, `LOC_NOW_LON`, `LOC_MAP_URL`. After a finished trip (or when `LOC_TRAVEL_TIME >= LOC_MAX_EVENT_TIME`) it prepares a **calendar event** (see the local variables below). The calendar is chosen by `LOC_CALENDAR_NAME`. |
+| [check-current-app](src/calendar-log/check-current-app.bsh.java) | Sets the global variables: `APP_NAME`, `APP_PACKAGE`, increments `APP_TIME_COUNT` if **app didn't change** since last check. After a long series of usage of a single app it prepares a **calendar event** (see the local variables below). The calendar is chosen by `APP_CALENDAR_NAME`. |
+| [insert-calendar-event](src/calendar-log/insert-calendar-event.bsh.java) | Inserts the event prepared by the two scripts above into the calendar named `event_calendar_name` (account: `CALENDAR_ACCOUNT`). Does nothing when `event_duration` is `0`, and resets it to `0` after inserting. |
+
+The `check-*` scripts hand the event over to `insert-calendar-event` through **local variables** of the macro: `event_title`, `event_description`, `event_location`, `event_calendar_name` and `event_duration` (in minutes; the event ends *now* and starts that many minutes earlier).
 
 #### Workflow
 
@@ -260,6 +263,8 @@ Regular interval (`LOC_CHECK_INTERVAL`)
 
 Run: `check-location.bsh`
 
+Run: `insert-calendar-event.bsh`
+
 </td>
 </tr>
 <tr>
@@ -276,6 +281,8 @@ Regular interval (`APP_CHECK_INTERVAL`)
 <td>
 
 Run: `check-current-app.bsh`
+
+Run: `insert-calendar-event.bsh`
 
 </td>
 </tr>

@@ -114,8 +114,8 @@ boolean isRetryable(int httpStatusCode) {
 void writeOutputs(String requestBody, boolean success, int httpStatusCode, String responseBody, String responseText, int inputTokens, int outputTokens) {
 	variableSetter.setString("request_body", requestBody);
 	variableSetter.setBoolean("step_success", success);
-	variableSetter.setInt("response_return_code", httpStatusCode);
-	variableSetter.setString("response_output", responseBody);
+	variableSetter.setInt("http_status_code", httpStatusCode);
+	variableSetter.setString("response_body", responseBody);
 	variableSetter.setString("response_text", responseText);
 	variableSetter.setInt("input_tokens", inputTokens);
 	variableSetter.setInt("output_tokens", outputTokens);
