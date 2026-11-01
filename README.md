@@ -32,15 +32,15 @@ Automated UI interactions, **supervised by Claude**. You're defining a goal, and
 
 ![Screen recording - automated document scan](media/canon-print.gif)
 
-| Script | What it does |
-| --- | --- |
-| [ask-claude](src/ui-agent/ask-claude.bsh.java) | Sends a prompt to the **Claude API** via an HTTP request, retries it if failed |
-| [get-current-screen-content](src/helpers/get-current-screen-content.bsh.java) | Reads every text visible on screen into a JSON object, with ***view IDs*** as values. Also used by [System Maintenance Restriction](#system-maintenance-restriction-srcsysmaint-restrict). |
-| [save-a-new-rule](src/ui-agent/save-a-new-rule.bsh.java) | Checks Claude's answer and maps the **current screen state** to a rule (saved to `rules.json`) |
-| [match-an-existing-rule](src/ui-agent/match-an-existing-rule.bsh.java) | Checks if there is a rule in `rules.json` for the current screen state |
-| [extract-rule-action](src/ui-agent/extract-rule-action.bsh.java) | Extracts the action of a matched rule into the `action_dict` dictionary (keys: `type`, `view_id`, `seconds`) |
-| [ask-user-for-instruction](src/ui-agent/ask-user-for-instruction.bsh.java) | After an error, asks the user what should happen on the current screen |
-| [plan-next-step](src/ui-agent/plan-next-step.bsh.java) | Together with all scripts above, **decides what should happen next** (whether to ask Claude for a new rule, or do the UI action based on an existing rule, etc.). |
+| Script | What it does                                                                                                                                                                                                      |
+| --- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [ask-claude](src/ui-agent/ask-claude.bsh.java) | Sends a prompt to the **Claude API** via an HTTP request, retries it if failed                                                                                                                                    |
+| [get-current-screen-content](src/helpers/get-current-screen-content.bsh.java) | Reads every text visible on screen into a JSON object, with ***view IDs*** as values. Also used by [System Maintenance Restriction](#system-maintenance-restriction-srcsysmaint-restrict).                        |
+| [save-a-new-rule](src/ui-agent/save-a-new-rule.bsh.java) | Checks Claude's answer and maps the **current screen state** to a rule (saved to `rules.json`)                                                                                                                    |
+| [match-an-existing-rule](src/ui-agent/match-an-existing-rule.bsh.java) | Checks if there is a rule in `rules.json` for the current screen state                                                                                                                                            |
+| [extract-rule-action](src/ui-agent/extract-rule-action.bsh.java) | Extracts the action of a matched rule into the `action_dict` dictionary (keys: `type`, `view_id`, `seconds`)                                                                                                      |
+| [ask-user-for-instruction](src/ui-agent/ask-user-for-instruction.bsh.java) | After an error, asks the user what should happen on the current screen                                                                                                                                            |
+| [plan-next-step](src/ui-agent/plan-next-step.bsh.java) | Together with all scripts above, **decides what should happen next** - whether to ask Claude for a new rule, or do the UI action based on an existing rule, etc. ([More details](src/ui-agent/plan-next-step.md)) |
 
 #### Example workflow
 <details>
@@ -63,7 +63,7 @@ Loop for `timeout_mins` minutes:
 > > <sub><br/>Output Variable: `screen_contents_json`</sub>
 > >
 > > Run: `match-an-existing-rule.bsh`
-> > <sub><br/>Output Variable: `match_json`</sub>
+> > <sub><br/>Output Variable: `match_result_json`</sub>
 >
 > ```java
 > } else if (planned_next_step == "ASK") {
@@ -80,7 +80,7 @@ Loop for `timeout_mins` minutes:
 > > <sub><br/>Output Variable: `screen_contents_json`</sub>
 > 
 > > Run: `save-a-new-rule.bsh`
-> > <sub><br/>Output Variable: `save_json`</sub>
+> > <sub><br/>Output Variable: `save_result_json`</sub>
 >
 > ```java
 > } else if (planned_next_step == "EXECUTE_MATCH" || planned_next_step == "EXECUTE_SAVED") {
@@ -88,9 +88,9 @@ Loop for `timeout_mins` minutes:
 >
 > > ```java
 > > if (planned_next_step == "EXECUTE_MATCH") {
-> >   rule_result_json = "{lv=match_json}"
+> >   rule_result_json = "{lv=match_result_json}"
 > > } else if (planned_next_step == "EXECUTE_SAVED") {
-> >   rule_result_json = "{lv=save_json}"
+> >   rule_result_json = "{lv=save_result_json}"
 > > }
 > > ```
 >
@@ -159,7 +159,7 @@ Let's say we want to **block YouTube** after using it for more than 15 minutes:
 <td>
 
 ```java
-APP_TIME_COUNT > 15
+APP_USAGE_MINS > 15
 && APP_PACKAGE == "com.google.android.youtube"
 ```
 
@@ -234,11 +234,11 @@ Logs events to your calendar, very useful when you sometimes wonder: ***"What wa
 
 | Script | What it does |
 | --- | --- |
-| [check-location](src/calendar-log/check-location.bsh.java) | Calculates the distance between the **current location** and the previous one - if greater than **100 m**, increments `LOC_TRAVEL_TIME`. Sets the global variables: `LOC_NOW_LAT`, `LOC_NOW_LON`, `LOC_MAP_URL`. After a finished trip (or when `LOC_TRAVEL_TIME >= LOC_MAX_EVENT_TIME`) it prepares a **calendar event** (see the local variables below). The calendar is chosen by `LOC_CALENDAR_NAME`. |
-| [check-current-app](src/calendar-log/check-current-app.bsh.java) | Sets the global variables: `APP_NAME`, `APP_PACKAGE`, increments `APP_TIME_COUNT` if **app didn't change** since last check. After a long series of usage of a single app it prepares a **calendar event** (see the local variables below). The calendar is chosen by `APP_CALENDAR_NAME`. |
-| [insert-calendar-event](src/calendar-log/insert-calendar-event.bsh.java) | Inserts the event prepared by the two scripts above into the calendar named `event_calendar_name` (account: `CALENDAR_ACCOUNT`). Does nothing when `event_duration` is `0`, and resets it to `0` after inserting. |
+| [check-location](src/calendar-log/check-location.bsh.java) | Calculates the distance between the **current location** and the previous one - if greater than **100 m**, increments `LOC_TRAVEL_MINS`. Sets the global variables: `LOC_LAST_LAT`, `LOC_LAST_LON`, `LOC_MAP_URL`. After a finished trip (or when `LOC_TRAVEL_MINS >= LOC_MAX_EVENT_MINS`) it prepares a **calendar event** (see the local variables below). The calendar is chosen by `LOC_CALENDAR_NAME`. |
+| [check-current-app](src/calendar-log/check-current-app.bsh.java) | Sets the global variables: `APP_NAME`, `APP_PACKAGE`, increments `APP_USAGE_MINS` if **app didn't change** since last check. After a long series of usage of a single app it prepares a **calendar event** (see the local variables below). The calendar is chosen by `APP_CALENDAR_NAME`. |
+| [insert-calendar-event](src/calendar-log/insert-calendar-event.bsh.java) | Inserts the event prepared by the two scripts above into the calendar named `event_calendar_name` (account: `CALENDAR_ACCOUNT`). Does nothing when `event_duration_mins` is `0`, and resets it to `0` after inserting. |
 
-The `check-*` scripts hand the event over to `insert-calendar-event` through **local variables** of the macro: `event_title`, `event_description`, `event_location`, `event_calendar_name` and `event_duration` (in minutes; the event ends *now* and starts that many minutes earlier).
+The `check-*` scripts hand the event over to `insert-calendar-event` through **local variables** of the macro: `event_title`, `event_description`, `event_location`, `event_calendar_name` and `event_duration_mins` (in minutes; the event ends *now* and starts that many minutes earlier).
 
 #### Workflow
 
