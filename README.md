@@ -341,6 +341,10 @@ When a variable changes value during runtime, you won't see it in the console ou
 ```java
 magicText.evaluateBoolean("{" + "v=SOME_VAR" + "}");
 ```
+</details>
+
+<details open>
+<summary><h2>Editing scripts</h2></summary>
 
 ### Wait, Claude Code on Android?
 
