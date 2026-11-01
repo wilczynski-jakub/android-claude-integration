@@ -29,9 +29,9 @@ Moreover, when working with code, you can use AI to for code edits. Although the
 
 Automated UI interactions, **supervised by Claude**. You're defining a goal, and the script **reads the current screen state** and creates *rules* for it (i.e. maps screen states to actions that should be done, e.g. clicking an element), saved to `rules.json`. When no rule matches, or the UI gets stuck, **Claude is asked via API** about what should be done.
 
-![Screen recording - automated document scan](media/canon-print.gif)
+<sub>The screen recording (right below this text) shows how the UI agent works when asked to scan a document.</sub>
 
-<sub>The screen recording right above this text shows how the UI agent works when asked to scan a document.</sub>
+![Screen recording - automated document scan](media/canon-print.gif)
 
 | Script | What it does                                                                                                                                                                                                      |
 | --- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -133,9 +133,9 @@ Loop for `timeout_mins` minutes:
 
 Useful for **self-discipline macros**, for example: when you want MacroDroid to **block another app**, in order for it to really work, you should neither be able to open the MacroDroid app, uninstall it nor revoke its permissions.
 
-![Screen recording - MacroDroid app settings blocked](media/installed-apps-lock.gif)
+<sub>The screen recording (right below this text) shows how, as soon as the text *"MacroDroid"* is detected on screen in the Settings app, the phone gets locked.</sub>
 
-<sub>The screen recording right above this text shows how, as soon as the text *"MacroDroid"* is detected on screen in the Settings app, the phone gets locked.</sub>
+![Screen recording - MacroDroid app settings blocked](media/installed-apps-lock.gif)
 
 | Script | What it does |
 | --- | --- |
